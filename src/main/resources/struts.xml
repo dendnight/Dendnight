@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN"
+    "http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+
+	<!-- Constants -->
+	<constant name="struts.objectFactory" value="spring" />
+
+	<constant name="struts.i18n.encoding" value="UTF-8" />
+	<constant name="struts.action.extension" value="htm" />
+	<constant name="struts.serve.static" value="true" />
+	<constant name="struts.serve.static.browserCache" value="false" />
+	<constant name="struts.multipart.maxSize" value="1002097152" />
+	<constant name="struts.ui.theme" value="simple" />
+	<constant name="struts.enable.SlashesInActionNames" value="true" />
+
+	<!-- 提供json 格式的支持 -->
+	<package name="default" extends="json-default">
+
+		<interceptors>
+		    <interceptor name="authority" class="com.dendnight.AuthorityInterceptor"/>
+			<interceptor-stack name="baseInterceptorStack">
+				<interceptor-ref name="defaultStack" />
+	            <interceptor-ref name="authority"/>  
+			</interceptor-stack>
+		</interceptors>
+		<default-interceptor-ref name="baseInterceptorStack"></default-interceptor-ref>
+		<global-results>
+			<result name="json" type="json" >
+				<param name="root">json</param><!-- 返回json -->
+			</result>
+			<result name="timeout" type="redirect">/index.html</result><!-- 超时 -->
+		</global-results>
+		
+	</package>
+	
+	<package name="main" namespace="/" extends="default">
+	    <action name="login" class="UserAction" method="login">
+	        <interceptor-ref name="defaultStack"></interceptor-ref>
+	    </action>
+	    
+	    <action name="to-login" class="UserAction" method="toLogin">
+	        <interceptor-ref name="defaultStack"></interceptor-ref>
+	        <result>/WEB-INF/view/login.jsp</result>
+	    </action>
+	    
+	    <action name="logout" class="UserAction" method="logout">
+	        <result type="redirect">/index.html</result>
+	    </action>
+	    
+		<action name="to-index" class="UserAction" method="toIndex">
+	    	<result>/WEB-INF/view/index.jsp</result>
+		</action>
+		
+		<action name="to-create" class="TaskAction" method="toCreate">
+		    <result>/WEB-INF/view/task-create.jsp</result>
+		</action>
+		
+		<action name="to-list" class="TaskAction" method="toList">
+		    <result>/WEB-INF/view/task-list.jsp</result>
+		</action>
+		
+		<action name="to-update-password" class="UserAction" method="toUpdatePassword">
+		    <result>/WEB-INF/view/user-update-password.jsp</result>
+		</action>
+		
+		<action name="to-detail" class="TaskAction" method="toDetail">
+		    <result>/WEB-INF/view/task-detail.jsp</result>
+		</action>
+		
+		<action name="update-password" class="UserAction" method="updatePassword"></action>
+		
+		<action name="user-list" class="UserAction" method="list"></action>
+		
+		<action name="list" class="TaskAction" method="list"></action>
+		
+		<!-- 未提交的一天的 -->
+		<action name="today-list" class="TaskAction" method="list">
+		    <param name="criteria.today">1</param>
+		</action>
+		
+		<!-- 提交后的 -->
+		<action name="task-list" class="TaskAction" method="list">
+		    <param name="criteria.isSubmit">1</param>
+		</action>
+		
+		<!-- 提交一天的 -->
+		<action name="submit-today" class="TaskAction" method="submitToday"></action>
+		
+		<!-- 提交单个 -->
+		<action name="submit-task" class="TaskAction" method="submitTask"></action>
+		
+		<action name="create" class="TaskAction" method="create"></action>
+		
+		<action name="update" class="TaskAction" method="update"></action>
+		
+		<action name="find" class="TaskAction" method="find"></action>
+		
+		<action name="exe-task" class="TaskAction" method="exeTask"></action>
+		
+		<action name="del" class="TaskAction" method="del"></action>
+				
+	</package>
+	
+	<package name="admin" namespace="/admin" extends="default">
+	    <action name="list" class="UserAdminAction" method="list">
+		    <result>/WEB-INF/admin/user-list.jsp</result>
+	    </action>
+	    <action name="to-create" class="UserAdminAction" method="toCreate">
+		    <result>/WEB-INF/admin/user-create.jsp</result>    
+	    </action>
+	    <action name="create" class="UserAdminAction" method="create"></action>
+	    <action name="to-update" class="UserAdminAction" method="toUpdate">
+		    <result>/WEB-INF/admin/user-update.jsp</result>
+	    </action>
+	    <action name="update" class="UserAdminAction" method="update"></action>
+	    <action name="del" class="UserAdminAction" method="del"></action>
+	    
+	</package>
+	
+	<package name="rv" namespace="/rv" extends="default">
+	    <action name="user-list" class="ReviewAction" method="ulist"></action>
+	    <action name="task-list" class="ReviewAction" method="tlist">
+	        <result>/WEB-INF/view/review/task-list.jsp</result>
+	    </action>
+	    <action name="task-detail" class="ReviewAction" method="find">
+	        <result>/WEB-INF/view/review/task-detail.jsp</result>
+	    </action>
+	</package>
+</struts>
