@@ -15,24 +15,14 @@
 	<context:annotation-config />
 	<context:component-scan base-package="com.dendnight" />
 
-	<!-- c3p0 connection pool configuration -->
-	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
-		destroy-method="close">
+	<!--数据源配置 -->
+	<bean id="dataSource" class="org.apache.tomcat.jdbc.pool.DataSource">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
 		<property name="url" value="jdbc:mysql://localhost:3306/dendnight" />
-		<property name="username" value="root" />
-		<property name="password" value="123" />
+		<property name="username" value="root"></property>
+		<property name="password" value="123"></property>
+		<property name="initialSize" value="5" />
 		<property name="maxActive" value="10" />
-		<property name="minIdle" value="1" />
-		<property name="maxIdle" value="10" /> 
-		<!-- 设置在自动回收超时连接的时候打印连接的超时错误 -->
-		<property name="logAbandoned" value="true" />
-		<!-- 设置自动回收超时连接 -->
-		<property name="removeAbandoned" value="true" />
-		<!-- 超时时间(以秒数为单位) -->
-		<property name="removeAbandonedTimeout" value="10" />
-		<!-- 超时等待时间以毫秒为单位 -->
-		<property name="maxWait" value="100" />
 	</bean>
 
 	<!--JDBC Transaction Manage -->
