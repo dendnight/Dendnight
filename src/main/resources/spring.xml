@@ -16,13 +16,23 @@
 	<context:component-scan base-package="com.dendnight" />
 
 	<!-- c3p0 connection pool configuration -->
-	<bean id="dataSource"
-		class="org.springframework.jdbc.datasource.DriverManagerDataSource"
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
 		destroy-method="close">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
 		<property name="url" value="jdbc:mysql://localhost:3306/dendnight" />
 		<property name="username" value="root" />
 		<property name="password" value="123" />
+		<property name="maxActive" value="10" />
+		<property name="minIdle" value="1" />
+		<property name="maxIdle" value="10" /> 
+		<!-- 设置在自动回收超时连接的时候打印连接的超时错误 -->
+		<property name="logAbandoned" value="true" />
+		<!-- 设置自动回收超时连接 -->
+		<property name="removeAbandoned" value="true" />
+		<!-- 超时时间(以秒数为单位) -->
+		<property name="removeAbandonedTimeout" value="10" />
+		<!-- 超时等待时间以毫秒为单位 -->
+		<property name="maxWait" value="100" />
 	</bean>
 
 	<!--JDBC Transaction Manage -->
@@ -33,33 +43,32 @@
 
 	<tx:advice id="tm" transaction-manager="transactionManager">
 		<tx:attributes>
-			<tx:method name="delete*" propagation="REQUIRED" read-only="false"
+			<tx:method name="del*" propagation="REQUIRED" read-only="false"
 				rollback-for="java.lang.Exception" no-rollback-for="java.lang.RuntimeException" />
-			<tx:method name="insert*" propagation="REQUIRED" read-only="false"
+			<tx:method name="add*" propagation="REQUIRED" read-only="false"
 				rollback-for="java.lang.RuntimeException" />
 			<tx:method name="update*" propagation="REQUIRED" read-only="false"
 				rollback-for="java.lang.Exception" />
 
 			<tx:method name="find*" propagation="SUPPORTS" />
-			<tx:method name="get*" propagation="SUPPORTS" />
-			<tx:method name="select*" propagation="SUPPORTS" />
+			<tx:method name="list*" propagation="SUPPORTS" />
 		</tx:attributes>
 	</tx:advice>
 
 	<aop:config>
 		<aop:pointcut id="exe"
-			expression="execution(public * com.dendnight.service.*.*(..))" /> <!--把事务控制在Service层 -->
+			expression="execution(public * com.dendnight.*.*(..))" /> <!--把事务控制在Service层 -->
 		<aop:advisor pointcut-ref="exe" advice-ref="tm" />
 	</aop:config>
 
 	<!--MyBatis integration with Spring as define sqlSessionFactory -->
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-		<property name="configLocation" value="classpath:mybatis-configuration.xml"></property>
+		<property name="configLocation" value="classpath:mybatis-config.xml"></property>
 		<property name="dataSource" ref="dataSource" />
 	</bean>
 
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
-		<property name="basePackage" value="com.dendnight.mapper"></property>
+		<property name="basePackage" value="com.dendnight"></property>
 	</bean>
 </beans>

@@ -48,9 +48,10 @@ public class AuthorityInterceptor extends AbstractInterceptor {
 
 	private boolean isAjaxRequest(HttpServletRequest request) {
 		String header = request.getHeader("X-Requested-With");
-		if (header != null && "XMLHttpRequest".equals(header))
+		if (header != null && "XMLHttpRequest".equals(header)) {
 			return true;
-		else
+		} else {
 			return false;
+		}
 	}
 }

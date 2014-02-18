@@ -16,7 +16,7 @@
 
 		<!-- 数据库连接 -->
 		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
-			connectionURL="jdbc:mysql://127.0.0.1:3306/tms?characterEncoding=utf8"
+			connectionURL="jdbc:mysql://127.0.0.1:3306/dendnight?characterEncoding=utf8"
 			userId="root" password="123">
 		</jdbcConnection>
 
@@ -25,32 +25,40 @@
 		</javaTypeResolver>
 
 		<!-- 数据表对应的model 层 -->
-		<javaModelGenerator targetPackage="tms.s.model"
+		<javaModelGenerator targetPackage="com.dendnight.gallery.model"
 			targetProject="src\main\java">
 			<property name="enableSubPackages" value="true" />
 			<property name="trimStrings" value="true" />
 		</javaModelGenerator>
 
 		<!-- sql mapper 映射配置文件 -->
-		<sqlMapGenerator targetPackage="tms.s.mapper"
+		<sqlMapGenerator targetPackage="com.dendnight.gallery.mapper"
 			targetProject="src\main\java">
 			<property name="enableSubPackages" value="true" />
 		</sqlMapGenerator>
 
 		<!-- 在ibatis2 中是dao层，但在mybatis3中，其实就是mapper接口 -->
 		<javaClientGenerator type="XMLMAPPER"
-			targetPackage="tms.s.mapper" targetProject="src\main\java">
+			targetPackage="com.dendnight.gallery.mapper" targetProject="src\main\java">
 			<property name="enableSubPackages" value="true" />
 		</javaClientGenerator>
 
 		<!-- 要对那些数据表进行生成操作，必须要有一个. -->
-		<table schema="mybatis" alias="u" tableName="t_user" domainObjectName="User"
-			enableCountByExample="true" enableUpdateByExample="true"
-			enableDeleteByExample="true" enableSelectByExample="true"
-			selectByExampleQueryId="true">
+		<table schema="mybatis" alias="i" tableName="t_image"
+			domainObjectName="Image" enableCountByExample="true"
+			enableUpdateByExample="true" enableDeleteByExample="true"
+			enableSelectByExample="true" selectByExampleQueryId="true">
+
+		</table>
+
+		<table schema="mybatis" alias="t" tableName="t_thumbnail"
+			domainObjectName="Thumbnail" enableCountByExample="true"
+			enableUpdateByExample="true" enableDeleteByExample="true"
+			enableSelectByExample="true" selectByExampleQueryId="true">
 			<!-- 返回主键值 -->
 			<generatedKey column="id" sqlStatement="JDBC" identity="true" />
 		</table>
-		<!-- 生成过的表 t_user、t_task、t_tasking、t_content、t_dict-->
+
+		<!-- 生成过的表 t_user\\t_image -->
 	</context>
 </generatorConfiguration>

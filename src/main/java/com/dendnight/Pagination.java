@@ -9,7 +9,7 @@ import java.io.Serializable;
  * Description
  * Copyright:	Copyright (c)2013  
  * Company:		DENDNIGHT
- * Author:		dendnight
+ * Author:		Dendnight
  * Version:		1.0  
  * Create at:	2014年2月16日 下午3:10:24  
  *  
@@ -30,7 +30,7 @@ public abstract class Pagination implements Serializable {
 	/**
 	 * 默认分页大小. 无需分页时，为0时则表示无需分页。
 	 */
-	private int pagesize = 10;
+	private int pagesize = 20;
 
 	/**
 	 * 当前页
