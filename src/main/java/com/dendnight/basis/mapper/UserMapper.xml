@@ -385,7 +385,10 @@
   <sql id="list_where">
       <trim prefix="where" prefixOverrides="and">
           <if test="deleted != null">
-      	  	and u.deleted = #{deleted,jdbcType=INTEGER}
+      	  	and u.deleted = #{deleted}
+     	 </if>
+          <if test="username != null">
+      	  	and u.username = #{username}
      	 </if>
       </trim>
   </sql>

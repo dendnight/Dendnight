@@ -26,6 +26,9 @@ public class UserCriteria extends Pagination {
 	/** 是否删除 */
 	private Integer deleted = 0;
 
+	/** 用户名 */
+	private String username;
+
 	@Override
 	public String getDefaultSort() {
 		// TODO Auto-generated method stub
@@ -44,6 +47,14 @@ public class UserCriteria extends Pagination {
 
 	public void setDeleted(Integer deleted) {
 		this.deleted = deleted;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 	@Override
