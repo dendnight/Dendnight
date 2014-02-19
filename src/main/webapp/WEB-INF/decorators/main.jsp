@@ -8,7 +8,7 @@ String path = request.getContextPath();
 String url = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";  
 %>
 <!doctype html>
-<html lang="zh-cn">
+<html lang="zh-CN">
 	<head>
 		<title><decorator:title default="Dendnight"/></title>
 		<meta charset="UTF-8"/>
@@ -23,14 +23,6 @@ String url = request.getScheme()+"://"+request.getServerName()+":"+request.getSe
 		<script type="text/javascript" src="<%= url %>js/jquery.form.min.js"></script>
 		<script type="text/javascript" src="<%= url %>js/jquery.placeholder.min.js"></script>
 		<decorator:head/>
-		<script type="text/javascript">
-			$(function(){
-				if(m_current){
-					$(".navbar-nav > li").removeClass("active");
-					$("#"+m_current).addClass("active");
-				}
-			});
-		</script>
     </head>
 	<body>
 		<div id="wrap">

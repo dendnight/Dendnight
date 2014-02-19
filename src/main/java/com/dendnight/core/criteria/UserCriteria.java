@@ -31,8 +31,7 @@ public class UserCriteria extends Pagination {
 
 	@Override
 	public String getDefaultSort() {
-		// TODO Auto-generated method stub
-		return null;
+		return "created_time";
 	}
 
 	@Override
