@@ -108,6 +108,7 @@ public class UserAction extends BaseAction {
 		info.setUsertype(list.getResult().get(0).getUserType());
 		session.put(LOGININFO, info);
 
+		json.put(S, 1);
 		return JSON;
 	}
 
