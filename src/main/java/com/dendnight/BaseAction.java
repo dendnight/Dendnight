@@ -50,7 +50,7 @@ public class BaseAction extends ActionSupport implements SessionAware {
 	/** JSON对象 */
 	protected static final String O = "o";
 
-	/** JSON状态 */
+	/** JSON状态 1成功0失败 */
 	protected static final String S = "s";
 
 	/** JSON会话超时 */

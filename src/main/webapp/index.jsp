@@ -8,22 +8,16 @@
 %>
 <html>
 <body>
-	<h2>Hello World!</h2>
 	<div class="panel panel-default">
 		<div class="panel-body">
 			<div style="display: none; text-align: center;" class="alert"></div>
-			<h2>
-				Hi!
-				<s:property value="#session.loginInfo.realname" />
-				<s:if test="#session.loginInfo.userType == 'UT_COMMON'">
-					<button type="button" data-loading-text="提交中..."
-						class="btn btn-default pull-right">
-						<i class="glyphicon glyphicon-cloud-upload"></i> <span>提交当天任务</span>
-					</button>
-				</s:if>
-			</h2>
-			<div id='calendar'></div>
-			<div style="height: 50px"></div>
+			<h2>Hi!</h2>
+			<input type="file" />
+			<button type="button" data-loading-text="提交中..."
+				class="btn btn-default pull-right">
+				<i class="glyphicon glyphicon-cloud-upload"></i> <span>上传</span>
+			</button>
+			<div style="height: 500px"></div>
 		</div>
 	</div>
 </body>

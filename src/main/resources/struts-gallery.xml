@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN"
+    "http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+
+	<!-- 图库 -->
+	<package name="gallery" namespace="/gallery" extends="default">
+		<action name="login" class="UserAction" method="login">
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+		</action>
+
+
+	</package>
+
+</struts>

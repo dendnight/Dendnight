@@ -25,6 +25,7 @@ public class UserServiceTest extends AbstractJUnit4SpringContextTests {
 		user.setNickname("Dendnight");
 		user.setUsername("dendnight");
 		user.setPassword("123");
+		user.setUserType("ADMIN");
 		try {
 			userService.add(user, info);
 		} catch (Exception e) {
