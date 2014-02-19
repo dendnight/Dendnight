@@ -4,8 +4,8 @@
 
 <struts>
 
-	<!-- 基础 -->
-	<package name="basis" namespace="/" extends="default">
+	<!-- 核心 -->
+	<package name="core" namespace="/" extends="default">
 		<action name="login" class="UserAction" method="login">
 			<interceptor-ref name="defaultStack"></interceptor-ref>
 		</action>

@@ -1,4 +1,9 @@
-package com.dendnight.basis.action;
+package com.dendnight.core.action;
+
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Controller;
+
+import com.dendnight.core.BaseAction;
 
 /**
  * 用户信息
@@ -17,6 +22,10 @@ package com.dendnight.basis.action;
  * 
  * </pre>
  */
-public class UserAction {
+@Controller("UserAction")
+@Scope("prototype")
+public class UserAction extends BaseAction {
+
+	private static final long serialVersionUID = 2947742528007149564L;
 
 }

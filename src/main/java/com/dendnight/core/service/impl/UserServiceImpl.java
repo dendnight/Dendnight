@@ -1,4 +1,4 @@
-package com.dendnight.basis.service.impl;
+package com.dendnight.core.service.impl;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -8,12 +8,12 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.dendnight.LoginInfo;
-import com.dendnight.PaginatedList;
-import com.dendnight.basis.criteria.UserCriteria;
-import com.dendnight.basis.mapper.UserMapper;
-import com.dendnight.basis.model.User;
-import com.dendnight.basis.service.UserService;
+import com.dendnight.core.LoginInfo;
+import com.dendnight.core.PaginatedList;
+import com.dendnight.core.criteria.UserCriteria;
+import com.dendnight.core.mapper.UserMapper;
+import com.dendnight.core.model.User;
+import com.dendnight.core.service.UserService;
 import com.dendnight.utils.EncryptionUtil;
 
 /**

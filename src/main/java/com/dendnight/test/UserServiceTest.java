@@ -5,9 +5,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.AbstractJUnit4SpringContextTests;
 
-import com.dendnight.LoginInfo;
-import com.dendnight.basis.model.User;
-import com.dendnight.basis.service.UserService;
+import com.dendnight.core.LoginInfo;
+import com.dendnight.core.model.User;
+import com.dendnight.core.service.UserService;
 
 @ContextConfiguration("classpath:spring.xml")
 public class UserServiceTest extends AbstractJUnit4SpringContextTests {

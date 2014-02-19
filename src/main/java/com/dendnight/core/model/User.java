@@ -1,4 +1,4 @@
-package com.dendnight.basis.model;
+package com.dendnight.core.model;
 
 import java.util.Date;
 

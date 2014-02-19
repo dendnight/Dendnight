@@ -60,7 +60,7 @@
 
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
-		<property name="basePackage" value="com.dendnight.basis.mapper"></property>
+		<property name="basePackage" value="com.dendnight.core.mapper"></property>
 	</bean>
 
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">

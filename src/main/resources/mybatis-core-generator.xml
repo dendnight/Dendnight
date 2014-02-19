@@ -25,21 +25,21 @@
 		</javaTypeResolver>
 
 		<!-- 数据表对应的model 层 -->
-		<javaModelGenerator targetPackage="com.dendnight.basis.model"
+		<javaModelGenerator targetPackage="com.dendnight.core.model"
 			targetProject="src\main\java">
 			<property name="enableSubPackages" value="true" />
 			<property name="trimStrings" value="true" />
 		</javaModelGenerator>
 
 		<!-- sql mapper 映射配置文件 -->
-		<sqlMapGenerator targetPackage="com.dendnight.basis.mapper"
+		<sqlMapGenerator targetPackage="com.dendnight.core.mapper"
 			targetProject="src\main\java">
 			<property name="enableSubPackages" value="true" />
 		</sqlMapGenerator>
 
 		<!-- 在ibatis2 中是dao层，但在mybatis3中，其实就是mapper接口 -->
 		<javaClientGenerator type="XMLMAPPER"
-			targetPackage="com.dendnight.basis.mapper" targetProject="src\main\java">
+			targetPackage="com.dendnight.core.mapper" targetProject="src\main\java">
 			<property name="enableSubPackages" value="true" />
 		</javaClientGenerator>
 
@@ -51,6 +51,5 @@
 			<generatedKey column="id" sqlStatement="JDBC" identity="true" />
 		</table>
 
-		<!-- 生成过的表 t_user\t_thumbnail\t_image -->
 	</context>
 </generatorConfiguration>

@@ -1,9 +1,9 @@
-package com.dendnight.basis.service;
+package com.dendnight.core.service;
 
-import com.dendnight.LoginInfo;
-import com.dendnight.PaginatedList;
-import com.dendnight.basis.criteria.UserCriteria;
-import com.dendnight.basis.model.User;
+import com.dendnight.core.LoginInfo;
+import com.dendnight.core.PaginatedList;
+import com.dendnight.core.criteria.UserCriteria;
+import com.dendnight.core.model.User;
 
 /**
  * 用户信息服务接口

@@ -1,12 +1,12 @@
-package com.dendnight.basis.mapper;
+package com.dendnight.core.mapper;
 
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
-import com.dendnight.basis.criteria.UserCriteria;
-import com.dendnight.basis.model.User;
-import com.dendnight.basis.model.UserExample;
+import com.dendnight.core.criteria.UserCriteria;
+import com.dendnight.core.model.User;
+import com.dendnight.core.model.UserExample;
 
 public interface UserMapper {
 	/**

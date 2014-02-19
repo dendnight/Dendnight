@@ -18,7 +18,8 @@
 	<package name="default" extends="json-default">
 
 		<interceptors>
-			<interceptor name="authority" class="com.dendnight.AuthorityInterceptor" />
+			<interceptor name="authority"
+				class="com.dendnight.core.AuthorityInterceptor" />
 			<interceptor-stack name="baseInterceptorStack">
 				<interceptor-ref name="defaultStack" />
 				<interceptor-ref name="authority" />
@@ -37,7 +38,7 @@
 	</package>
 
 	<!-- 导入配置 -->
-	<include file="struts-basis.xml" />
+	<include file="struts-core.xml" />
 	<include file="struts-gallery.xml" />
 
 </struts>
