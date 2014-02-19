@@ -14,7 +14,7 @@
 		// 提交表单
 		$(".btn-primary").click(function() {
 			$("#login-form").ajaxSubmit(function(data) {
-				//alert(data.m);
+				alert(data.m);
 				if (data.s) {
 					alert("登录成功");
 				}
