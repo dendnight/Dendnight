@@ -37,7 +37,7 @@ public class MybatisUtil {
 
 		List<String> warnings = new ArrayList<String>();
 		boolean overwrite = true;
-		String mg = "/mybatis-basis-generator.xml";
+		String mg = "/mybatis-core-generator.xml";
 
 		// String mg = "/mybatis-gallery-generator.xml";
 
