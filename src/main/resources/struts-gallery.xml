@@ -6,7 +6,7 @@
 
 	<!-- 图库 -->
 	<package name="gallery" namespace="/gallery" extends="default">
-		<action name="login" class="UserAction" method="login">
+		<action name="upload" class="GalleryAction" method="upload">
 			<interceptor-ref name="defaultStack"></interceptor-ref>
 		</action>
 
