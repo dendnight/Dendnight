@@ -8,8 +8,8 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.dendnight.core.LoginInfo;
-import com.dendnight.core.PaginatedList;
+import com.dendnight.base.LoginInfo;
+import com.dendnight.base.PaginatedList;
 import com.dendnight.core.criteria.UserCriteria;
 import com.dendnight.core.mapper.UserMapper;
 import com.dendnight.core.model.User;

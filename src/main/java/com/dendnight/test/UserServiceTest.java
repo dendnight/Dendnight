@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.AbstractJUnit4SpringContextTests;
 
-import com.dendnight.core.LoginInfo;
+import com.dendnight.base.LoginInfo;
 import com.dendnight.core.model.User;
 import com.dendnight.core.service.UserService;
 

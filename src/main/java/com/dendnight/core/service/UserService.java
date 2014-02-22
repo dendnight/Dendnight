@@ -1,7 +1,7 @@
 package com.dendnight.core.service;
 
-import com.dendnight.core.LoginInfo;
-import com.dendnight.core.PaginatedList;
+import com.dendnight.base.LoginInfo;
+import com.dendnight.base.PaginatedList;
 import com.dendnight.core.criteria.UserCriteria;
 import com.dendnight.core.model.User;
 

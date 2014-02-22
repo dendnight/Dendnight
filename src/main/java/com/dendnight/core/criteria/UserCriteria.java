@@ -1,6 +1,6 @@
 package com.dendnight.core.criteria;
 
-import com.dendnight.core.Pagination;
+import com.dendnight.base.Pagination;
 
 /**
  * 用户信息查询条件

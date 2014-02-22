@@ -4,13 +4,14 @@ import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.struts2.ServletActionContext;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
-import com.dendnight.core.BaseAction;
+import com.dendnight.base.BaseAction;
 
 /**
  * 图库信息
@@ -41,6 +42,8 @@ public class GalleryAction extends BaseAction {
 	private String uploadFileFileName; // 得到上传的文件的名称
 
 	public String upload() {
+		json = new HashMap<String, Object>();
+
 		String realPath = ServletActionContext.getServletContext().getRealPath("../../images");
 		SimpleDateFormat sdf = new SimpleDateFormat("/yyMM/ddHH");
 		Date date = new Date();
@@ -79,6 +82,7 @@ public class GalleryAction extends BaseAction {
 				}
 			}
 		}
+		json.put(S, 1);
 		return JSON;
 	}
 

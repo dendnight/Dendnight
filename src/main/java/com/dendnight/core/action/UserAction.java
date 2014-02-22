@@ -8,9 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
-import com.dendnight.core.BaseAction;
-import com.dendnight.core.LoginInfo;
-import com.dendnight.core.PaginatedList;
+import com.dendnight.base.BaseAction;
+import com.dendnight.base.LoginInfo;
+import com.dendnight.base.PaginatedList;
 import com.dendnight.core.criteria.UserCriteria;
 import com.dendnight.core.model.User;
 import com.dendnight.core.service.UserService;
