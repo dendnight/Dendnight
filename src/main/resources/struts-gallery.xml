@@ -6,10 +6,12 @@
 
 	<!-- 图库 -->
 	<package name="gallery" namespace="/gallery" extends="default">
-		<action name="upload" class="GalleryAction" method="upload">
+		<action name="upload" class="UploadImageAction">
 			<interceptor-ref name="defaultStack"></interceptor-ref>
 		</action>
-
+		<action name="upload-progress" class="UploadProgressAction">
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+		</action>
 
 	</package>
 

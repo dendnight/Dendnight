@@ -4,6 +4,8 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.fileupload.ProgressListener;
 
+import com.dendnight.base.Commons;
+
 public class UploadProgressListener implements ProgressListener {
 
 	private long megaBytes = -1;
@@ -12,18 +14,17 @@ public class UploadProgressListener implements ProgressListener {
 
 	public UploadProgressListener(HttpServletRequest request) {
 		this.request = request;
-		String progressKey = (String)request.getParameter("id");
-		progressInfo = (UploadInfo) request.getSession().getAttribute( progressKey);
-		if (progressKey !=null && progressInfo == null) {
-			progressInfo = new UploadInfo();	
+		progressInfo = (UploadInfo) request.getSession().getAttribute(Commons.IMG_PROGRESS_INFO);
+		if (null == progressInfo) {
+			progressInfo = new UploadInfo();
 			// uploadInfo
-			request.getSession().setAttribute(progressKey, progressInfo);
+			request.getSession().setAttribute(Commons.IMG_PROGRESS_INFO, progressInfo);
 		}
 	}
 
 	public void update(long pBytesRead, long pContentLength, int pItems) {
 
-		long mBytes = pBytesRead / (16*1024);
+		long mBytes = pBytesRead / (16 * 1024);
 
 		if (megaBytes == mBytes) {
 			return;

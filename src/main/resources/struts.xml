@@ -13,13 +13,15 @@
 	<constant name="struts.multipart.maxSize" value="1002097152" />
 	<constant name="struts.ui.theme" value="simple" />
 	<constant name="struts.enable.SlashesInActionNames" value="true" />
+	<constant name="struts.multipart.parser"
+		value="com.dendnight.gallery.extend.UploadMultiPartRequest" />
 
 	<!-- 提供json 格式的支持 -->
 	<package name="default" extends="json-default">
 
 		<interceptors>
 			<interceptor name="authority"
-				class="com.dendnight.core.AuthorityInterceptor" />
+				class="com.dendnight.base.AuthorityInterceptor" />
 			<interceptor-stack name="baseInterceptorStack">
 				<interceptor-ref name="defaultStack" />
 				<interceptor-ref name="authority" />

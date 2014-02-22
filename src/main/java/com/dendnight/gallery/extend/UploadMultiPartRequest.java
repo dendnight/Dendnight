@@ -74,13 +74,9 @@ public class UploadMultiPartRequest implements MultiPartRequest {
 			ServletFileUpload upload = new ServletFileUpload(factory);
 			upload.setSizeMax(maxSize);
 
-			String progressKey = (String) servletRequest.getParameter("id");
-			if (progressKey != null) {
-				// --------------add by wf start------------
-				UploadProgressListener progressListener = new UploadProgressListener(servletRequest);
-				upload.setProgressListener(progressListener);
-				// --------------add by wf end------------
-			}
+			// --------------add by wf start------------
+			upload.setProgressListener(new UploadProgressListener(servletRequest));
+			// --------------add by wf end------------
 
 			List items = upload.parseRequest(createRequestContext(servletRequest));
 

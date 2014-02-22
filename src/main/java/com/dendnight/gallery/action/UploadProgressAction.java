@@ -1,66 +1,54 @@
 package com.dendnight.gallery.action;
 
-import java.io.PrintWriter;
+import java.util.HashMap;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.struts2.ServletActionContext;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Controller;
 
+import com.dendnight.base.BaseAction;
+import com.dendnight.base.Commons;
 import com.dendnight.gallery.extend.UploadInfo;
-import com.opensymphony.xwork2.ActionSupport;
 
-public class UploadProgressAction extends ActionSupport {
+/**
+ * 上传进度
+ * 
+ * <pre>
+ * Description
+ * Copyright:	Copyright (c)2013  
+ * Company:		DENDNIGHT
+ * Author:		dendnight
+ * Version:		1.0  
+ * Create at:	2014年2月23日 上午2:38:03  
+ *  
+ * 修改历史:
+ * 日期    作者    版本  修改描述
+ * ------------------------------------------------------------------
+ * 
+ * </pre>
+ */
+@Controller("UploadProgressAction")
+@Scope("prototype")
+public class UploadProgressAction extends BaseAction {
 
-	private static final long serialVersionUID = 1L;
-	private String id;
-	public static int percent = 0;
+	private static final long serialVersionUID = -8612812298817388417L;
 
 	public String execute() {
-		try {
-			HttpServletRequest request = ServletActionContext.getRequest();
-			HttpServletResponse response = ServletActionContext.getResponse();
-			PrintWriter out = response.getWriter();
-			HttpSession session = request.getSession();
-			if (id != null) {
-				UploadInfo progressInfo = (UploadInfo) session.getAttribute(id);
-				if (progressInfo != null) {
-					response.setContentType("text/html;charset=UTF-8");
-					write2Client(out, getInfo(progressInfo));// info
-					return null;
-				}
-			}
-			write2Client(out, "{status:\"done\"}");
 
-		} catch (Exception e) {
-			e.printStackTrace();
+		json = new HashMap<String, Object>();
+		json.put(S, 0);
+
+		HttpSession session = ServletActionContext.getRequest().getSession();
+		UploadInfo progressInfo = (UploadInfo) session.getAttribute(Commons.IMG_PROGRESS_INFO);
+
+		if (progressInfo != null) {
+			json.put(S, 1);
+			json.put(Commons.IMG_PROGRESS_INFO, progressInfo);
 		}
-		return null;
+
+		return JSON;
 	}
 
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
-	}
-
-	public String getInfo(UploadInfo info) {
-		if (info != null) {
-			StringBuffer sb = new StringBuffer("{status:\"" + info.getStatus() + "\",");
-			sb.append("bytes_uploaded:\"" + info.getBytesRead() + "\",");
-			sb.append("bytes_total:\"" + info.getTotalSize() + "\"");
-			sb.append("}");
-			return sb.toString();
-		}
-		return "{status:\"failed\"}";
-	}
-
-	public void write2Client(PrintWriter out, String html) {
-		out.write(html);
-		out.flush();
-		out.close();
-	}
 }
