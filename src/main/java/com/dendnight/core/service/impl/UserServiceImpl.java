@@ -14,7 +14,7 @@ import com.dendnight.core.criteria.UserCriteria;
 import com.dendnight.core.mapper.UserMapper;
 import com.dendnight.core.model.User;
 import com.dendnight.core.service.UserService;
-import com.dendnight.utils.EncryptionUtil;
+import com.dendnight.utils.Md5Utils;
 
 /**
  * 用户信息接口实现
@@ -41,7 +41,7 @@ public class UserServiceImpl implements UserService {
 
 	public int add(User user, LoginInfo info) throws Exception {
 		if (StringUtils.isNotBlank(user.getPassword())) {
-			user.setPassword(EncryptionUtil.md5Digest(user.getPassword()));
+			user.setPassword(Md5Utils.getMd5ByStr(user.getPassword()));
 		}
 
 		userMapper.insertSelective(user);

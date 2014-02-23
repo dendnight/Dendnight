@@ -14,11 +14,11 @@ public class UploadProgressListener implements ProgressListener {
 
 	public UploadProgressListener(HttpServletRequest request) {
 		this.request = request;
-		progressInfo = (UploadInfo) request.getSession().getAttribute(Commons.IMG_PROGRESS_INFO);
+		progressInfo = (UploadInfo) request.getSession().getAttribute(Commons.IMAGE_PROGRESS_INFO);
 		if (null == progressInfo) {
 			progressInfo = new UploadInfo();
 			// uploadInfo
-			request.getSession().setAttribute(Commons.IMG_PROGRESS_INFO, progressInfo);
+			request.getSession().setAttribute(Commons.IMAGE_PROGRESS_INFO, progressInfo);
 		}
 	}
 

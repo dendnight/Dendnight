@@ -41,11 +41,11 @@ public class UploadProgressAction extends BaseAction {
 		json.put(S, 0);
 
 		HttpSession session = ServletActionContext.getRequest().getSession();
-		UploadInfo progressInfo = (UploadInfo) session.getAttribute(Commons.IMG_PROGRESS_INFO);
+		UploadInfo progressInfo = (UploadInfo) session.getAttribute(Commons.IMAGE_PROGRESS_INFO);
 
 		if (progressInfo != null) {
 			json.put(S, 1);
-			json.put(Commons.IMG_PROGRESS_INFO, progressInfo);
+			json.put(Commons.IMAGE_PROGRESS_INFO, progressInfo);
 		}
 
 		return JSON;

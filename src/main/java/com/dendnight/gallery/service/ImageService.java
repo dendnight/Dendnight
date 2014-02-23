@@ -1,5 +1,8 @@
 package com.dendnight.gallery.service;
 
+import com.dendnight.base.LoginInfo;
+import com.dendnight.gallery.model.Image;
+
 /**
  * 图片接口
  * 
@@ -19,4 +22,20 @@ package com.dendnight.gallery.service;
  */
 public interface ImageService {
 
+	/**
+	 * 添加图片
+	 * 
+	 * @param image
+	 * @param info
+	 */
+	void add(Image image, LoginInfo info);
+
+	/**
+	 * 查询图片
+	 * 
+	 * @param id
+	 * @param info
+	 * @return
+	 */
+	Image find(String id, LoginInfo info);
 }

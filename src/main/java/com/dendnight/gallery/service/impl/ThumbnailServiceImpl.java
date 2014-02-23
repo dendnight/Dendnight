@@ -38,6 +38,7 @@ public class ThumbnailServiceImpl implements ThumbnailService {
 	private ThumbnailMapper thumbnailMapper;
 
 	public int add(Thumbnail thumbnail, LoginInfo info) {
+		thumbnail.setCreatedBy(info.getId());
 		thumbnailMapper.insertSelective(thumbnail);
 		return thumbnail.getId();
 	}

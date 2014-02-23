@@ -14,7 +14,7 @@ import com.dendnight.base.PaginatedList;
 import com.dendnight.core.criteria.UserCriteria;
 import com.dendnight.core.model.User;
 import com.dendnight.core.service.UserService;
-import com.dendnight.utils.EncryptionUtil;
+import com.dendnight.utils.Md5Utils;
 
 /**
  * 用户信息
@@ -88,7 +88,7 @@ public class UserAction extends BaseAction {
 		}
 
 		try {
-			if (!EncryptionUtil.md5Digest(password).equals(list.getResult().get(0).getPassword())) {
+			if (!Md5Utils.getMd5ByStr(password).equals(list.getResult().get(0).getPassword())) {
 				json.put(M, "密码输入有误");
 				json.put(S, 0);
 				return JSON;

@@ -1,5 +1,8 @@
 package com.dendnight.base;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * 简单字典
  * 
@@ -20,5 +23,20 @@ package com.dendnight.base;
 public class Commons {
 
 	/** 图片上传进度信息 */
-	public static final String IMG_PROGRESS_INFO = "progress";
+	public static final String IMAGE_PROGRESS_INFO = "progress";
+
+	/** 图片类型 */
+	public static final List<String> IMAGETYPE = new ArrayList<String>();
+	static {
+		IMAGETYPE.add("image/jpeg");
+		IMAGETYPE.add("image/gif");
+		IMAGETYPE.add("image/bmp");
+		IMAGETYPE.add("image/png");
+		IMAGETYPE.add("image/pjpeg");
+		IMAGETYPE.add("image/x-icon");
+	}
+
+	/** 图片文件最大值 5MB */
+	public static final Long IMAGE_MAX_SIZE = 5242880L;
+
 }
