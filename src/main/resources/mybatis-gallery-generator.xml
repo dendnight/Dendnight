@@ -43,22 +43,29 @@
 			<property name="enableSubPackages" value="true" />
 		</javaClientGenerator>
 
-		<!-- 要对那些数据表进行生成操作，必须要有一个. -->
+		<!-- 要对那些数据表进行生成操作，必须要有一个. 
 		<table schema="mybatis" alias="i" tableName="t_image"
 			domainObjectName="Image" enableCountByExample="true"
 			enableUpdateByExample="true" enableDeleteByExample="true"
 			enableSelectByExample="true" selectByExampleQueryId="true">
 
-		</table>
+		</table>-->
 
+		<!-- 
 		<table schema="mybatis" alias="t" tableName="t_thumbnail"
 			domainObjectName="Thumbnail" enableCountByExample="true"
+			enableUpdateByExample="true" enableDeleteByExample="true"
+			enableSelectByExample="true" selectByExampleQueryId="true">
+			<generatedKey column="id" sqlStatement="JDBC" identity="true" />
+		</table> -->
+		<!--  -->
+		<table schema="mybatis" alias="db" tableName="t_data_base64"
+			domainObjectName="DataBase64" enableCountByExample="true"
 			enableUpdateByExample="true" enableDeleteByExample="true"
 			enableSelectByExample="true" selectByExampleQueryId="true">
 			<!-- 返回主键值 -->
 			<generatedKey column="id" sqlStatement="JDBC" identity="true" />
 		</table>
 
-		<!-- 生成过的表 t_user\\t_image -->
 	</context>
 </generatorConfiguration>

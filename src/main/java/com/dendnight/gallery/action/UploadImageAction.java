@@ -64,7 +64,7 @@ public class UploadImageAction extends BaseAction {
 			}
 
 		} catch (Exception e) {
-			e.printStackTrace();// "data:" + type + ";base64," + data);
+			e.printStackTrace();
 			return INPUT;
 		}
 
