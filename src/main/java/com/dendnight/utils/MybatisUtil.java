@@ -37,9 +37,9 @@ public class MybatisUtil {
 
 		List<String> warnings = new ArrayList<String>();
 		boolean overwrite = true;
-		String mg = "/mybatis-core-generator.xml";
+		// String mg = "/mybatis-core-generator.xml";
 
-		// String mg = "/mybatis-gallery-generator.xml";
+		String mg = "/mybatis-gallery-generator.xml";
 
 		File configFile = new File(MybatisUtil.class.getResource(mg).getFile());
 		ConfigurationParser cp = new ConfigurationParser(warnings);

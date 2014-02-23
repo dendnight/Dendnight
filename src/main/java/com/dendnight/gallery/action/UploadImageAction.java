@@ -11,12 +11,15 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.struts2.ServletActionContext;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import com.dendnight.base.BaseAction;
 import com.dendnight.base.Commons;
 import com.dendnight.gallery.extend.UploadInfo;
+import com.dendnight.gallery.model.Thumbnail;
+import com.dendnight.gallery.service.ThumbnailService;
 
 /**
  * 上传图片
@@ -39,12 +42,17 @@ import com.dendnight.gallery.extend.UploadInfo;
 @Scope("prototype")
 public class UploadImageAction extends BaseAction {
 
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 6374328329827914564L;
+
+	@Autowired
+	private ThumbnailService thumbnailService;
+
 	private File uploadFile;
 	private String uploadFileContentType;
 	private String uploadFileFileName;
 
 	public String execute() {
+		json = new HashMap<String, Object>();
 		try {
 			HttpServletRequest request = ServletActionContext.getRequest();
 			HttpSession session = request.getSession(true);
@@ -56,10 +64,9 @@ public class UploadImageAction extends BaseAction {
 			}
 
 		} catch (Exception e) {
-			e.printStackTrace();
+			e.printStackTrace();// "data:" + type + ";base64," + data);
 			return INPUT;
 		}
-		json = new HashMap<String, Object>();
 
 		String realPath = ServletActionContext.getServletContext().getRealPath("../../images");
 		SimpleDateFormat sdf = new SimpleDateFormat("/yyMM/ddHH");
@@ -99,6 +106,10 @@ public class UploadImageAction extends BaseAction {
 				}
 			}
 		}
+
+		Thumbnail thumbnail = new Thumbnail();
+		// thumbnail.set
+		thumbnailService.add(thumbnail, info());
 		json.put(S, 1);
 		return JSON;
 	}

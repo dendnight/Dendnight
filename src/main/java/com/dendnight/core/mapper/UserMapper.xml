@@ -387,7 +387,7 @@
 		<if test="_parameter != null">
 			<include refid="list_where" />
 		</if>
-		ORDER BY u.${sort} ${order}
+		ORDER BY ${sort} ${order}
 		<if test="pagesize != 0">
 			LIMIT #{offset}, #{pagesize}
 		</if>
