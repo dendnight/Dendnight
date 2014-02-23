@@ -15,7 +15,7 @@
 		$(".btn-primary").click(function() {
 			$("#login-form").ajaxSubmit(function(data) {
 				if (data.s) {
-					alert("登录成功");
+					window.location.href="http://localhost:8080/Dendnight/upload.jsp";
 					return;
 				}
 				alert(data.m);
@@ -23,16 +23,6 @@
 			return false;
 		});
 
-		$(".btn-default").click(function(){
-			$("#upload-form").ajaxSubmit(function(data) {
-				if (data.s) {
-					alert("上传成功");
-					return;
-				}
-				alert(data.m);
-			});
-			return false;
-		});
 	});
 </script>
 </head>
@@ -43,19 +33,6 @@
 			<div style="display: none; text-align: center;" class="alert"></div>
 			<h2>Hi!</h2>
 
-			<div class="panel panel-default">
-				<div class="panel-body">
-					<form id="upload-form" action="<%=url%>gallery/upload.htm"
-						enctype="multipart/form-data" method="post">
-						<input type="file" name="uploadFile" /> <br />
-						<button type="submit" data-loading-text="提交中..."
-							class="btn btn-default">
-							<i class="glyphicon glyphicon-cloud-upload"></i> <span>上传</span>
-						</button>
-					</form>
-				</div>
-			</div>
-			<br /> <br /> <br />
 			<div class="panel panel-default">
 				<div class="panel-body">
 					<form id="login-form" action="<%=url%>login.htm" method="post">

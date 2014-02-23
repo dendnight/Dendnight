@@ -28,6 +28,7 @@ public class Commons {
 	/** 图片类型 */
 	public static final List<String> IMAGETYPE = new ArrayList<String>();
 	static {
+		IMAGETYPE.add("image/jpg");
 		IMAGETYPE.add("image/jpeg");
 		IMAGETYPE.add("image/gif");
 		IMAGETYPE.add("image/bmp");

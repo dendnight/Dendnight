@@ -14,14 +14,9 @@
 		// 提交表单
 		$(".btn-default").click(function() {
 			$(".progress-bar").css("width", "0%");
+			$(".progress-bar").html("0%");
 			beginUpload();
-			$("#upload-form").ajaxSubmit(function(data) {
-				if (data.s) {
-					alert("上传成功");
-					return;
-				}
-				alert(data.m);
-			});
+			$("#upload-form").ajaxSubmit();
 			return false;
 		});
 
@@ -30,14 +25,13 @@
 	function beginUpload() {
 		var i = setInterval(function() {
 		$.getJSON("<%=url%>gallery/upload-progress.htm", function(data) {
-			alert(data.progress.bytesRead);
 				var percentage = Math.floor(100 * parseInt(data.progress.bytesRead)
 						/ parseInt(data.progress.totalSize));
 				$(".progress-bar").css("width", percentage + "%");
 				$(".progress-bar").html(percentage + "%");
 				if (data.s == 1)//terminate the procedure.
 				{
-					alert("upload done.");
+					alert("上传成功！");
 					clearInterval(i);
 					return;
 				}
