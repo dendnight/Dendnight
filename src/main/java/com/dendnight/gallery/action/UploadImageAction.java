@@ -74,6 +74,11 @@ public class UploadImageAction extends BaseAction {
 
 		json = new HashMap<String, Object>();
 
+		if (timeout) {
+			json.put(T, 1);
+			return JSON;
+		}
+
 		// 验证图片
 		if (null == uploadFile || !Commons.IMAGETYPE.contains(uploadFileContentType)
 				|| Commons.IMAGE_MAX_SIZE < uploadFile.length()) {

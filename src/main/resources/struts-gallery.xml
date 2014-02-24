@@ -13,6 +13,9 @@
 			<interceptor-ref name="defaultStack"></interceptor-ref>
 		</action>
 
+		<action name="find" class="ImageAction"></action>
+		
+		<action name="list-oneself" class="GalleryAction"></action>
 	</package>
 
 </struts>

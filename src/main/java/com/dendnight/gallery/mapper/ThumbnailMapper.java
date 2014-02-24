@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Param;
 import com.dendnight.gallery.criteria.ThumbnailCriteria;
 import com.dendnight.gallery.model.Thumbnail;
 import com.dendnight.gallery.model.ThumbnailExample;
+import com.dendnight.gallery.model.vo.ThumbnailVo;
 
 public interface ThumbnailMapper {
 	/**
@@ -99,5 +100,5 @@ public interface ThumbnailMapper {
 
 	int count(ThumbnailCriteria criteria);
 
-	List<Thumbnail> list(ThumbnailCriteria criteria);
+	List<ThumbnailVo> list(ThumbnailCriteria criteria);
 }

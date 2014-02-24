@@ -372,13 +372,19 @@
 			<if test="deleted != null">
 				and t.deleted = #{deleted}
 			</if>
+			<if test="userId != null">
+				and t.created_by = #{userId}
+			</if>
+			<if test="publish != null">
+				and t.publish = #{publish}
+			</if>
 		</trim>
 	</sql>
 
-	<select id="list" parameterType="com.dendnight.gallery.criteria.ThumbnailCriteria" resultMap="BaseResultMap">
+	<select id="list" parameterType="com.dendnight.gallery.criteria.ThumbnailCriteria" resultMap="list_map">
 		select
-		<include refid="Base_Column_List" />
-		from t_thumbnail t
+		<include refid="Base_Column_List" />,db.data as dataBase64
+		from t_thumbnail t left join t_data_base64 db on t.base64_id = db.id 
 		<if test="_parameter != null">
 			<include refid="list_where" />
 		</if>
@@ -387,4 +393,8 @@
 			LIMIT #{offset}, #{pagesize}
 		</if>
 	</select>
+	
+	<resultMap extends="BaseResultMap" type="com.dendnight.gallery.model.vo.ThumbnailVo" id="list_map">
+	    <result column="dataBase64" property="dataBase64"/>
+	</resultMap>
 </mapper>

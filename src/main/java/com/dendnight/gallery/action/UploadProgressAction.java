@@ -38,8 +38,13 @@ public class UploadProgressAction extends BaseAction {
 	public String execute() {
 
 		json = new HashMap<String, Object>();
-		json.put(S, 0);
 
+		if (timeout) {
+			json.put(T, 1);
+			return JSON;
+		}
+
+		json.put(S, 0);
 		HttpSession session = ServletActionContext.getRequest().getSession();
 		UploadInfo progressInfo = (UploadInfo) session.getAttribute(Commons.IMAGE_PROGRESS_INFO);
 

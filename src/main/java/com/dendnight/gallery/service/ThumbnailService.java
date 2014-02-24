@@ -4,6 +4,7 @@ import com.dendnight.base.LoginInfo;
 import com.dendnight.base.PaginatedList;
 import com.dendnight.gallery.criteria.ThumbnailCriteria;
 import com.dendnight.gallery.model.Thumbnail;
+import com.dendnight.gallery.model.vo.ThumbnailVo;
 
 /**
  * 缩略图接口
@@ -57,7 +58,7 @@ public interface ThumbnailService {
 	 * @param info
 	 * @return
 	 */
-	PaginatedList<Thumbnail> list(ThumbnailCriteria criteria, LoginInfo info);
+	PaginatedList<ThumbnailVo> list(ThumbnailCriteria criteria, LoginInfo info);
 
 	/**
 	 * 修改缩略图

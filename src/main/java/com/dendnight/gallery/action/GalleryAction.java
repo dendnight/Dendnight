@@ -1,17 +1,19 @@
 package com.dendnight.gallery.action;
 
-import java.io.File;
-import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
-import org.apache.commons.io.FileUtils;
-import org.apache.struts2.ServletActionContext;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import com.dendnight.base.BaseAction;
+import com.dendnight.base.PaginatedList;
+import com.dendnight.gallery.criteria.ThumbnailCriteria;
+import com.dendnight.gallery.model.vo.ThumbnailVo;
+import com.dendnight.gallery.service.ThumbnailService;
 
 /**
  * 图库信息
@@ -36,78 +38,53 @@ public class GalleryAction extends BaseAction {
 
 	private static final long serialVersionUID = 7099263402897874899L;
 
-	/** 表单中的name属性 */
-	private File uploadFile;
-	private String uploadFileContentType; // 得到上传的文件的数据类型
-	private String uploadFileFileName; // 得到上传的文件的名称
+	@Autowired
+	private ThumbnailService thumbnailService;
 
-	public String upload() {
+	/** 页码 */
+	private Integer page = 1;
+
+	public String listOneself() {
 		json = new HashMap<String, Object>();
 
-		String realPath = ServletActionContext.getServletContext().getRealPath("../../images");
-		SimpleDateFormat sdf = new SimpleDateFormat("/yyMM/ddHH");
-		Date date = new Date();
-		String dateTime = sdf.format(date);
+		if (timeout) {
+			json.put(T, 1);
+			return JSON;
+		}
 
-		realPath += dateTime;
+		ThumbnailCriteria criteria = new ThumbnailCriteria();
+		criteria.setPage(page);
+		criteria.setUserId(info().getId());
 
-		System.out.println(uploadFileFileName);
-		System.out.println(date.getTime());
-		String newFileName = ("" + date.getTime()).substring(6)
-				+ uploadFileFileName.substring(uploadFileFileName.lastIndexOf('.'));
+		PaginatedList<ThumbnailVo> list = thumbnailService.list(criteria, info());
 
-		System.out.println(newFileName);
-		System.out.println(uploadFileContentType);
-		// 控制图片类型
-		if (uploadFileContentType.equals("image/gif") || uploadFileContentType.equals("image/jpeg")
-				|| uploadFileContentType.equals("image/png") || uploadFileContentType.equals("image/bmp")
-				|| uploadFileContentType.equals("image/x-icon") || uploadFileContentType.equals("image/pjpeg")) {
-			// 判断文件是否为空,并且文件不能大于2M
-			if (uploadFile != null && uploadFile.length() < 2097152) {
-				// 根据 parent 抽象路径名和 child 路径名字符串创建一个新 File 实例。
-				File filePath = new File(new File(realPath), newFileName);
-				// 判断路径是否存在
-				if (!filePath.getParentFile().exists()) {
-					// 如果不存在，则递归创建此路径
-					filePath.getParentFile().mkdirs();
-				}
+		// 处理数据，去除不必要的字段及内容
+		List<Map<String, Object>> thumbnail = new ArrayList<Map<String, Object>>();
 
-				System.out.println(filePath.getParentFile());
-				// 将文件保存到硬盘上,Struts2会帮我们自动删除临时文件
-				try {
-					FileUtils.copyFile(uploadFile, filePath);
-				} catch (IOException e) {
-					System.out.println("图片上传失败");
-					e.printStackTrace();
-				}
+		if (null != list && null != list.getResult() && 0 < list.getResult().size()) {
+			Map<String, Object> map = null;
+
+			for (ThumbnailVo it : list.getResult()) {
+				map = new HashMap<String, Object>();
+				map.put("imageId", it.getImageId());
+				map.put("filePath", it.getFilePath());
+
+				map.put("base64", it.getDataBase64());
+				thumbnail.add(map);
 			}
 		}
+
 		json.put(S, 1);
+		json.put(O, thumbnail);
 		return JSON;
 	}
 
-	public File getUploadFile() {
-		return uploadFile;
+	public Integer getPage() {
+		return page;
 	}
 
-	public void setUploadFile(File uploadFile) {
-		this.uploadFile = uploadFile;
-	}
-
-	public String getUploadFileContentType() {
-		return uploadFileContentType;
-	}
-
-	public void setUploadFileContentType(String uploadFileContentType) {
-		this.uploadFileContentType = uploadFileContentType;
-	}
-
-	public String getUploadFileFileName() {
-		return uploadFileFileName;
-	}
-
-	public void setUploadFileFileName(String uploadFileFileName) {
-		this.uploadFileFileName = uploadFileFileName;
+	public void setPage(Integer page) {
+		this.page = page;
 	}
 
 }

@@ -12,6 +12,7 @@ import com.dendnight.base.PaginatedList;
 import com.dendnight.gallery.criteria.ThumbnailCriteria;
 import com.dendnight.gallery.mapper.ThumbnailMapper;
 import com.dendnight.gallery.model.Thumbnail;
+import com.dendnight.gallery.model.vo.ThumbnailVo;
 import com.dendnight.gallery.service.ThumbnailService;
 
 /**
@@ -58,9 +59,9 @@ public class ThumbnailServiceImpl implements ThumbnailService {
 		return thumbnailMapper.selectByPrimaryKey(id);
 	}
 
-	public PaginatedList<Thumbnail> list(ThumbnailCriteria criteria, LoginInfo info) {
-		PaginatedList<Thumbnail> result = new PaginatedList<Thumbnail>();
-		List<Thumbnail> list = new ArrayList<Thumbnail>();
+	public PaginatedList<ThumbnailVo> list(ThumbnailCriteria criteria, LoginInfo info) {
+		PaginatedList<ThumbnailVo> result = new PaginatedList<ThumbnailVo>();
+		List<ThumbnailVo> list = new ArrayList<ThumbnailVo>();
 
 		if (0 < criteria.getPagesize()) {
 			int count = thumbnailMapper.count(criteria);
