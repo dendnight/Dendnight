@@ -25,21 +25,69 @@
 				<%-- 判断是否登录，未登录的只有登录 --%>
 				<s:if test="null == #session.loginInfo || null == #session.loginInfo.nickname">
 				<li><a href="#" data-toggle="modal" data-target="#modal-login">登录</a></li>
+				<script>
+				$(function() {
+					// 提交表单
+					$("#login-submit").click(function() {
+						var btn = $(this);
+					    btn.button('loading');
+						if($('#login-form').valid()){
+							$("#login-form").ajaxSubmit(function(data) {
+								if (data.s) {
+									alert(data.m);//window.location.href="<%= url %>upload.jsp";
+									return;
+								}else{
+									$(".alert").show();
+									$(".alert").addClass("alert-danger");
+									$(".alert-danger").text(data.m);
+								}
+							});							
+						}
+						btn.button('reset');
+						return false;
+					});
+			
+					$('#login-form').validate({
+					    rules: {
+					      username: {minlength: 6,required: true},
+					      password: {required: true}
+					  	},
+						messages : {
+							username:{required:'<span style=\'color:#a94442\'>帐号不能为空</span>',minlength:'<span style=\'color:#a94442\'>帐号最少为{0}个字符</span>'},
+							password:{required:'<span style=\'color:#a94442\'>密码不能为空</span>',minlength:'<span style=\'color:#a94442\'>密码最少为{0}个字符</span>'}
+						},highlight: function(element) {
+								$(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+						},success: function(element) {
+								$(element).closest('.form-group').removeClass('has-error').addClass('has-success');
+						}
+					  });
+				});
+				</script>
 				<!-- Modal -->
 				<div class="modal fade" id="modal-login" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-				  <div class="modal-dialog">
+				  <div class="modal-dialog" style="width:350px">
 				    <div class="modal-content">
 				      <div class="modal-header">
 				        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-				        <h4 class="modal-title" id="myModalLabel">登录</h4>
+				        <h3 class="modal-title" id="myModalLabel">欢迎登录“Dendnight”</h3>
 				      </div>
-				      <div class="modal-body">
-				        ...
-				      </div>
-				      <div class="modal-footer">
-				        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-				        <button type="button" class="btn btn-primary">登录</button>
-				      </div>
+				       <form id="login-form" action="<%= url %>login.htm" method="post">
+				        <div class="modal-body">
+							<div style="display: none;" class="alert">
+								<a class="close" data-dismiss="alert" href="#" aria-hidden="true">&times;</a>
+							</div>
+							<div class="form-group">
+								<input type="text" class="form-control" maxlength="20" required name="username" autocomplete="off" placeholder="帐号" autofocus/>
+							</div>
+							<div class="form-group">
+								<input type="password" class="form-control has-error" required maxlength="16" name="password" autocomplete="off" placeholder="密码" />
+							</div>
+				       </div>
+				       <div class="modal-footer">
+				        <button type="button" class="btn btn-default" style="width:45%" data-dismiss="modal">取消</button>
+				        <button id="login-submit" type="submit" class="btn btn-primary" style="width:45%" data-loading-text="验证中...">登录</button>
+				       </div>
+					  </form>
 				    </div><!-- /.modal-content -->
 				  </div><!-- /.modal-dialog -->
 				</div><!-- /.modal -->
@@ -52,7 +100,6 @@
 						<b class="caret"></b>
 					</a>
 					<ul class="dropdown-menu">
-						<li><a href="<%=url%>to-update-password.htm">修改密码</a></li>
 						<li class="divider"></li>
 						<li><a href="<%=url%>logout.htm">安全退出</a></li>
 					</ul>

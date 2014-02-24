@@ -15,7 +15,7 @@
 
 		<action name="find" class="ImageAction"></action>
 		
-		<action name="list-oneself" class="GalleryAction"></action>
+		<action name="list-oneself" class="GalleryAction" method="listOneself"></action>
 	</package>
 
 </struts>
