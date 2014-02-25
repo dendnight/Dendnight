@@ -9,7 +9,10 @@
 		<action name="login" class="UserAction" method="login">
 			<interceptor-ref name="defaultStack"></interceptor-ref>
 		</action>
-
+		<action name="logout" class="UserAction" method="logout">
+		    <interceptor-ref name="defaultStack"></interceptor-ref>
+	        <result type="redirect">/</result>
+		</action>
 
 	</package>
 </struts>

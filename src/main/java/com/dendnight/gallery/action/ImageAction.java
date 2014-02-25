@@ -58,4 +58,13 @@ public class ImageAction extends BaseAction {
 		json.put(O, image.getFilePath());
 		return JSON;
 	}
+
+	public String getImageId() {
+		return imageId;
+	}
+
+	public void setImageId(String imageId) {
+		this.imageId = imageId;
+	}
+
 }

@@ -25,6 +25,15 @@
 				<%-- 判断是否登录，未登录的只有登录 --%>
 				<s:if test="null == #session.loginInfo || null == #session.loginInfo.nickname">
 				<li><a href="#" data-toggle="modal" data-target="#modal-login">登录</a></li>
+				<li class="dropdown" style="visibility: hidden;">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+						<span class="glyphicon glyphicon-user"></span>
+						<b class="caret"></b>
+					</a>
+					<ul class="dropdown-menu">
+						<li><a href="<%=url%>logout.htm">安全退出</a></li>
+					</ul>
+				</li>
 				<script>
 				$(function() {
 					// 提交表单
@@ -100,7 +109,6 @@
 						<b class="caret"></b>
 					</a>
 					<ul class="dropdown-menu">
-						<li class="divider"></li>
 						<li><a href="<%=url%>logout.htm">安全退出</a></li>
 					</ul>
 				</li>

@@ -13,9 +13,11 @@
 			<interceptor-ref name="defaultStack"></interceptor-ref>
 		</action>
 
-		<action name="find" class="ImageAction"></action>
+		<action name="list" class="GalleryAction" method="list">
+		    <interceptor-ref name="defaultStack"></interceptor-ref>
+		</action>
 		
-		<action name="list-oneself" class="GalleryAction" method="listOneself"></action>
+		<action name="image" class="ImageAction"></action>
 	</package>
 
 </struts>

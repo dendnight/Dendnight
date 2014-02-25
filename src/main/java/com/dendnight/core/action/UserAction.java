@@ -112,6 +112,11 @@ public class UserAction extends BaseAction {
 		return JSON;
 	}
 
+	public String logout() {
+		session.put(LOGININFO, null);
+		return SUCCESS;
+	}
+
 	public String getNickname() {
 		return nickname;
 	}

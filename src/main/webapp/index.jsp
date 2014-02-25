@@ -8,12 +8,12 @@
 %>
 <html>
 <head>
-<script type="text/javascript" src="<%=path %>js/jquery.nested.js"></script>
+<script type="text/javascript" src="<%=url %>js/jquery.masonry.min.js"></script>
 <script type="text/javascript">
 	$(function(){
 		$.ajax({
             type: "POST",
-			url: "<%=url%>gallery/list-oneself.htm",
+			url: "<%=url%>gallery/list.htm",
 			//data: {"page":page,"title":$("#title").val()},  
 			dataType: 'json',
 			success: function(data) {
@@ -22,36 +22,44 @@
 					return;
 				}
 
-				var img = "";
+				var imgs = [];
+				var img = null;
 				$.each(data.o, function(i, item) {
-					img += "<img src=\""+item.base64+"\" alt=\"...\" class=\"img-thumbnail\">";
+					img = document.createElement("img");
+					img.src = item.base64;
+					img.className="img-thumbnail";
+					imgs.push(img);
 				});
-				$('.panel-body').html(img);
-				$("#container").nested({
-					  animate: true,
-					  animationOptions: {
-					    speed: 100,
-					    duration: 200,
-					    queue: true,
-					    complete: onComplete
-					  }
-					});
+				
+				$("#container").html(imgs);
+				
 			}
 		});
+
+		// initialize
+		$('#container').masonry({
+		  columnWidth: 25,
+		  itemSelector: '.img-thumbnail'
+		});
+		setTimeout("$('#container').masonry('reload')",100);
+		// 改变窗口后reload瀑布流
+	    $(window).load(function() {
+	        $('#container').masonry('reload');
+	    });
+		// 改变窗口后reload瀑布流
+	    $(window).resize(function() {
+	        $('#container').masonry('reload');
+	    });
+		
 	});
 </script>
 <style type="text/css">
-.img-thumbnail{
-	float: left;
-}
 </style>
 </head>
 
 <body>
-	<div class="panel panel-default">
-		<div class="panel-body">
-
-		</div>
-	</div>
+	<div id="container">
+	
+	</div> 
 </body>
 </html>

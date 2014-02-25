@@ -18,11 +18,13 @@ String url = request.getScheme()+"://"+request.getServerName()+":"+request.getSe
 	    <link rel="stylesheet" href="<%= url %>css/bootstrap.min.css"/>
 		<link rel="stylesheet" href="<%= url %>css/sticky-footer-navbar.css"/>
 		<link rel="shortcut icon" type="image/x-icon" href="<%= url %>images/favicon.ico"/>
+		<!--[if lt IE 9]>
+		<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+		<![endif]-->
 		<script type="text/javascript" src="<%= url %>js/jquery.min.js"></script>
 	    <script type="text/javascript" src="<%= url %>js/bootstrap.min.js"></script>
 		<script type="text/javascript" src="<%= url %>js/jquery.form.min.js"></script>
 		<script type="text/javascript" src="<%= url %>js/jquery.validate.min.js"></script>
-		<script type="text/javascript" src="<%= url %>js/jquery.placeholder.min.js"></script>
 		<decorator:head/>
     </head>
 	<body>

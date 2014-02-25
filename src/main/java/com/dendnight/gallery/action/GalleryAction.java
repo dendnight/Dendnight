@@ -44,7 +44,7 @@ public class GalleryAction extends BaseAction {
 	/** 页码 */
 	private Integer page = 1;
 
-	public String listOneself() {
+	public String list() {
 		json = new HashMap<String, Object>();
 
 		if (timeout) {
@@ -54,8 +54,6 @@ public class GalleryAction extends BaseAction {
 
 		ThumbnailCriteria criteria = new ThumbnailCriteria();
 		criteria.setPage(page);
-		criteria.setUserId(info().getId());
-
 		PaginatedList<ThumbnailVo> list = thumbnailService.list(criteria, info());
 
 		// 处理数据，去除不必要的字段及内容
@@ -67,7 +65,7 @@ public class GalleryAction extends BaseAction {
 			for (ThumbnailVo it : list.getResult()) {
 				map = new HashMap<String, Object>();
 				map.put("imageId", it.getImageId());
-				map.put("filePath", it.getFilePath());
+				// map.put("filePath", it.getFilePath());
 
 				map.put("base64", it.getDataBase64());
 				thumbnail.add(map);
