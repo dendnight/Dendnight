@@ -8,6 +8,11 @@
 %>
 <html>
 <head>
+<style type="text/css">
+.img-thumbnail{
+	margin-top:20px;
+}
+</style>
 <script type="text/javascript" src="<%=url %>js/jquery.masonry.min.js"></script>
 <script type="text/javascript">
 	$(function(){
@@ -32,15 +37,23 @@
 				});
 				
 				$("#container").html(imgs);
-				
+
+				$('#container')
+				  // initialize Masonry
+				  .masonry({
+					  columnWidth: 25,
+					  itemSelector: '.img-thumbnail'
+					})
+				  // now okay to use methods
+				  .masonry( 'appended', imgs );
 			}
 		});
 
-		// initialize
-		$('#container').masonry({
-		  columnWidth: 25,
-		  itemSelector: '.img-thumbnail'
-		});
+		// initialize Masonry
+		/*$('#container').masonry({
+			  columnWidth: 25,
+			  itemSelector: '.img-thumbnail'
+			});*/
 		setTimeout("$('#container').masonry('reload')",100);
 		// 改变窗口后reload瀑布流
 	    $(window).load(function() {

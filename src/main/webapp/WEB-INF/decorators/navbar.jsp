@@ -20,6 +20,9 @@
 		<div class="collapse navbar-collapse">
 			<ul class="nav navbar-nav">
 				<li class="active"><a href="#">gallery</a></li>
+				<li class="active"><a href="#">gallery</a></li>
+				<li class="active"><a href="#">gallery</a></li>
+				<li class="active"><a href="#">gallery</a></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<%-- 判断是否登录，未登录的只有登录 --%>
@@ -74,7 +77,7 @@
 				</script>
 				<!-- Modal -->
 				<div class="modal fade" id="modal-login" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-				  <div class="modal-dialog" style="width:350px">
+				  <div class="modal-dialog" style="max-width:350px">
 				    <div class="modal-content">
 				      <div class="modal-header">
 				        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
