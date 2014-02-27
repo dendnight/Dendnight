@@ -109,12 +109,15 @@ public class UserAction extends BaseAction {
 		session.put(LOGININFO, info);
 
 		json.put(S, 1);
+		json.put(O, info.getNickname());
 		return JSON;
 	}
 
 	public String logout() {
+		json = new HashMap<String, Object>();
 		session.put(LOGININFO, null);
-		return SUCCESS;
+		json.put(S, 1);
+		return JSON;
 	}
 
 	public String getNickname() {

@@ -23,7 +23,7 @@
 			dataType: 'json',
 			success: function(data) {
 				if(data.t){
-					$('#modal-login').modal('show');
+					$('#login-modal').modal('show');
 					return;
 				}
 
@@ -38,7 +38,7 @@
 				
 				$("#container").html(imgs);
 
-				$('#container')
+				/*$('#container')
 				  // initialize Masonry
 				  .masonry({
 					  columnWidth: 25,
@@ -46,6 +46,7 @@
 					})
 				  // now okay to use methods
 				  .masonry( 'appended', imgs );
+				*/
 			}
 		});
 
@@ -53,7 +54,7 @@
 		/*$('#container').masonry({
 			  columnWidth: 25,
 			  itemSelector: '.img-thumbnail'
-			});*/
+			});
 		setTimeout("$('#container').masonry('reload')",100);
 		// 改变窗口后reload瀑布流
 	    $(window).load(function() {
@@ -63,7 +64,7 @@
 	    $(window).resize(function() {
 	        $('#container').masonry('reload');
 	    });
-		
+		*/
 	});
 </script>
 <style type="text/css">
