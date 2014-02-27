@@ -27,18 +27,13 @@
 					return;
 				}
 
-				var imgs = [];
-				var img = null;
+				var imgs = "";
 				$.each(data.o, function(i, item) {
-					img = document.createElement("img");
-					img.src = item.base64;
-					img.className="img-thumbnail";
-					imgs.push(img);
+					imgs += "<img src=\""+item.base64+"\" class=\"img-thumbnail\">";
 				});
 				
 				$("#container").html(imgs);
-
-				/*$('#container')
+				$('#container')
 				  // initialize Masonry
 				  .masonry({
 					  columnWidth: 25,
@@ -46,7 +41,7 @@
 					})
 				  // now okay to use methods
 				  .masonry( 'appended', imgs );
-				*/
+
 			}
 		});
 

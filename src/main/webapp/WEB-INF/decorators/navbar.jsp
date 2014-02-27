@@ -16,11 +16,10 @@
 						if($('#login-form').valid()){
 							$("#login-form").ajaxSubmit(function(data) {
 								if (data.s) {
+									$('#nickname').text(data.o);
 									$('#login-li').hide();
 									$('#login-li').next('li').show();
-									$('#nickname').text(data.o);
 									$('#login-modal').modal('hide');
-									return;
 								}else{
 									$('.alert').show();
 									$('#login-msg').text(data.m);
@@ -45,6 +44,20 @@
 								$(element).closest('.form-group').removeClass('has-error').addClass('has-success');
 						}
 					  });
+					
+					$('#logout').click(function(){
+						$.ajax({
+							url: "<%=url%>logout.htm",
+							dataType: 'json',
+							success: function(data) {
+								if(data.s){
+									$('#login-li').show();
+									$('#login-li').next().hide();
+								}
+							}
+						});
+						
+					});
 				});
 				</script>
 <div class="navbar navbar-inverse navbar-fixed-top">
@@ -68,23 +81,25 @@
 				<li id="login-li"><a href="#" data-toggle="modal" data-target="#login-modal">登录</a></li>
 				<li class="dropdown" style="display: none;">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-						<span id="nickname" class="glyphicon glyphicon-user"></span>
+						<span class="glyphicon glyphicon-user"></span>
+						<span id="nickname"></span>
 						<b class="caret"></b>
 					</a>
 					<ul class="dropdown-menu">
-						<li><a href="<%=url%>logout.htm">安全退出</a></li>
+						<li  id="logout"><a href="#logout">安全退出</a></li>
 					</ul>
 				</li>
 				</s:if>
 				<s:else>
+				<li id="login-li" style="display: none;"><a href="#" data-toggle="modal" data-target="#login-modal">登录</a></li>
 				<li class="dropdown">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown">
 						<span class="glyphicon glyphicon-user"></span>
-						<s:property value="#session.loginInfo.nickname" />
+						<span id="nickname"><s:property value="#session.loginInfo.nickname" /></span>
 						<b class="caret"></b>
 					</a>
 					<ul class="dropdown-menu">
-						<li><a href="<%=url%>logout.htm">安全退出</a></li>
+						<li id="logout"><a href="#logout">安全退出</a></li>
 					</ul>
 				</li>
 				</s:else>

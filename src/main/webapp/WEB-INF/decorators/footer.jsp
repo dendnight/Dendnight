@@ -2,6 +2,6 @@
 	pageEncoding="UTF-8"%>
 <div id="footer">
 	<div class="container">
-		<p class="text-muted pull-right">Copyright 2013</p>
+		<p class="text-muted">Copyright 2014</p>
 	</div>
 </div>
