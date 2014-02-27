@@ -1,0 +1,32 @@
+@media (min-width: 1600px)
+.img-dimension {
+	width: 16.666666666666668%;
+}
+@media all and (min-width: 1400px)
+.img-dimension {
+	width: 20%;
+}
+@media all and (min-width: 1200px)
+.img-dimension {
+	width: 50%;
+}
+@media all and (min-width: 1000px)
+.img-dimension {
+	width: 50%;
+}
+@media all and (min-width: 800px)
+.img-dimension {
+	width: 33.333333333333336%;
+}
+@media all (min-width: 600px)
+.img-dimension .img-thumbnail{
+	width: 100%;
+}
+@media (min-width: 226px)
+.img-dimension {
+	width: 100%;
+}
+.img-dimension {
+	float: left;
+	background: #eee;
+}

@@ -8,6 +8,7 @@
 %>
 <html>
 <head>
+<link rel="stylesheet" href="<%= url %>css/image.css"/>
 <style type="text/css">
 .img-thumbnail{
 	margin-top:20px;
@@ -29,7 +30,7 @@
 
 				var imgs = "";
 				$.each(data.o, function(i, item) {
-					imgs += "<img src=\""+item.base64+"\" class=\"img-thumbnail\">";
+					imgs += "<div class=\"\"><img src=\""+item.base64+"\" class=\"img-dimension img-thumbnail\"></div>";
 				});
 				
 				$("#container").html(imgs);
@@ -37,7 +38,7 @@
 				  // initialize Masonry
 				  .masonry({
 					  columnWidth: 25,
-					  itemSelector: '.img-thumbnail'
+					  itemSelector: '.img-dimension'
 					})
 				  // now okay to use methods
 				  .masonry( 'appended', imgs );
