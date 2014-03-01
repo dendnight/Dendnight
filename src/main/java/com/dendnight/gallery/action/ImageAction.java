@@ -54,8 +54,13 @@ public class ImageAction extends BaseAction {
 			json.put(M, "图片不存在");
 			return JSON;
 		}
-		json.put(S, 0);
-		json.put(O, image.getFilePath());
+
+		String url = image.getFilePath();
+		url = url.substring(16);
+		System.out.println(url);
+
+		json.put(S, 1);
+		json.put(O, url);
 		return JSON;
 	}
 

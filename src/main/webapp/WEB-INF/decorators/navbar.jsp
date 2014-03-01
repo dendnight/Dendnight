@@ -73,7 +73,7 @@
 		</div>
 		<div class="collapse navbar-collapse">
 			<ul class="nav navbar-nav">
-				<li class="active"><a href="#">gallery</a></li>
+				<li class="active"><a href="<%= url %>">gallery</a></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<%-- 判断是否登录，未登录的只有登录 --%>

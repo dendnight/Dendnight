@@ -32,7 +32,6 @@
 		$.ajax({
             type: "POST",
 			url: "<%=url%>gallery/list.htm",
-			//data: {"page":page,"title":$("#title").val()},  
 			dataType: 'json',
 			success: function(data) {
 				if(data.t){
@@ -42,38 +41,43 @@
 
 				var imgs = "";
 				$.each(data.o, function(i, item) {
-					imgs += "<div class=\"img-thumbnail\"><a href=\"#\"><img src=\""+item.base64+"\"></a></div>";
+					imgs += "<div class=\"img-thumbnail\"><a href=\"#\" onclick=\"openImage('"+item.imageId+"');return false;\"><img src=\""+item.base64+"\"></a></div>";
 				});
 				
 				$("#container").html(imgs);
-				$('#container')
-				  // initialize Masonry
-				  .masonry({
-					  columnWidth: 25,
-					  itemSelector: '.img-thumbnail'
-					})
-				  // now okay to use methods
-				  .masonry( 'appended', imgs );
+				$('#container').masonry({
+					 columnWidth: 25,
+					 itemSelector: '.img-thumbnail'
+				}).masonry( 'appended', imgs );
 
+				setInterval("$('#container').masonry('reload');",100);
 			}
 		});
 
-		// initialize Masonry
-		setTimeout("$('#container').masonry('reload');",100);
-		/*$('#container').masonry({
-			  columnWidth: 25,
-			  itemSelector: '.img-thumbnail'
-			});
-		// 改变窗口后reload瀑布流
-	    $(window).load(function() {
-	        $('#container').masonry('reload');
-	    });
-		// 改变窗口后reload瀑布流
-	    $(window).resize(function() {
-	        $('#container').masonry('reload');
-	    });
-		*/
 	});
+
+	function openImage(id){
+		$.ajax({
+            type: "POST",
+			url: "<%=url%>gallery/image.htm",
+			data:{imageId:id},
+			dataType: 'json',
+			success: function(data) {
+				if(data.t){
+					$('#login-modal').modal('show');
+					return;
+				}
+				
+				if(data.s){
+					//alert(data.o);
+					window.location.href="<%=url%>"+data.o;
+					return;
+				}
+				alert(data.m);
+				
+			}
+		});
+	}
 </script>
 <style type="text/css">
 </style>

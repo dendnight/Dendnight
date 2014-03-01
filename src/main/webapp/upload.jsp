@@ -13,9 +13,8 @@
 	$(function() {
 		// 提交表单
 		$(".btn-default").click(function() {
-			if("" == $('#uploadFile').val()){
-				
-			}
+			// XXX 校验文件
+			
 			$(".progress-bar").css("width", "0%");
 			$(".progress-bar").html("0%");
 			beginUpload();
@@ -42,6 +41,8 @@
 				var progress = data.progress;
 				if(0 == progress.readedBytes){// 上传失败
 					clearInterval(i);
+					$(".progress-bar").css("width","0%");
+					$(".progress-bar").html("0%");
 					return;
 				}
 				var percentage = Math.floor(100 * parseInt(progress.readedBytes) / parseInt(progress.totalBytes));
