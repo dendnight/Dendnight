@@ -10,8 +10,20 @@
 <head>
 <link rel="stylesheet" href="<%= url %>css/image.css"/>
 <style type="text/css">
+
 .img-thumbnail{
 	margin-top:20px;
+}
+
+@media screen and(min-width:540px){
+	.img-thumbnail,.img-thumbnail img{
+		width:100%;
+	}
+}
+@media screen and(max-width:980px){
+	.img-thumbnail img{
+		width:25%;
+	}
 }
 </style>
 <script type="text/javascript" src="<%=url %>js/jquery.masonry.min.js"></script>
@@ -30,7 +42,7 @@
 
 				var imgs = "";
 				$.each(data.o, function(i, item) {
-					imgs += "<div class=\"\"><img src=\""+item.base64+"\" class=\"img-dimension img-thumbnail\"></div>";
+					imgs += "<div class=\"img-thumbnail\"><a href=\"#\"><img src=\""+item.base64+"\"></a></div>";
 				});
 				
 				$("#container").html(imgs);
@@ -38,7 +50,7 @@
 				  // initialize Masonry
 				  .masonry({
 					  columnWidth: 25,
-					  itemSelector: '.img-dimension'
+					  itemSelector: '.img-thumbnail'
 					})
 				  // now okay to use methods
 				  .masonry( 'appended', imgs );
@@ -47,11 +59,11 @@
 		});
 
 		// initialize Masonry
+		setTimeout("$('#container').masonry('reload');",100);
 		/*$('#container').masonry({
 			  columnWidth: 25,
 			  itemSelector: '.img-thumbnail'
 			});
-		setTimeout("$('#container').masonry('reload')",100);
 		// 改变窗口后reload瀑布流
 	    $(window).load(function() {
 	        $('#container').masonry('reload');

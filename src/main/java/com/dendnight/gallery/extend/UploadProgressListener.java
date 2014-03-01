@@ -8,36 +8,27 @@ import com.dendnight.base.Commons;
 
 public class UploadProgressListener implements ProgressListener {
 
-	private long megaBytes = -1;
 	HttpServletRequest request = null;
-	UploadInfo progressInfo = null;
+	UploadProgressInfo info = null;
 
 	public UploadProgressListener(HttpServletRequest request) {
 		this.request = request;
-		progressInfo = (UploadInfo) request.getSession().getAttribute(Commons.IMAGE_PROGRESS_INFO);
-		if (null == progressInfo) {
-			progressInfo = new UploadInfo();
+		info = (UploadProgressInfo) request.getSession().getAttribute(Commons.IMAGE_PROGRESS_INFO);
+		if (null == info) {
+			info = new UploadProgressInfo();
 			// uploadInfo
-			request.getSession().setAttribute(Commons.IMAGE_PROGRESS_INFO, progressInfo);
+			request.getSession().setAttribute(Commons.IMAGE_PROGRESS_INFO, info);
 		}
 	}
 
 	public void update(long pBytesRead, long pContentLength, int pItems) {
 
-		long mBytes = pBytesRead / (16 * 1024);
+		System.out.println(pBytesRead);
 
-		if (megaBytes == mBytes) {
-			return;
-		}
-		megaBytes = mBytes;
-		if (pContentLength == -1) {
-			progressInfo.setStatus(UploadInfo.STATUS_DONE);
-		} else {
-			progressInfo.setFileIndex(pItems);
-			progressInfo.setTotalSize(pContentLength);
-			progressInfo.setBytesRead(pBytesRead);
-			progressInfo.setStatus(UploadInfo.STATUS_PROGRESS);
-		}
+		info.setReadedBytes(pBytesRead);
+		info.setCurrentItem(pItems);
+		info.setTotalBytes(pContentLength);
+
 	}
 
 }

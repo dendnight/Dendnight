@@ -10,7 +10,7 @@ import org.springframework.stereotype.Controller;
 
 import com.dendnight.base.BaseAction;
 import com.dendnight.base.Commons;
-import com.dendnight.gallery.extend.UploadInfo;
+import com.dendnight.gallery.extend.UploadProgressInfo;
 
 /**
  * 上传进度
@@ -46,11 +46,11 @@ public class UploadProgressAction extends BaseAction {
 
 		json.put(S, 0);
 		HttpSession session = ServletActionContext.getRequest().getSession();
-		UploadInfo progressInfo = (UploadInfo) session.getAttribute(Commons.IMAGE_PROGRESS_INFO);
+		UploadProgressInfo info = (UploadProgressInfo) session.getAttribute(Commons.IMAGE_PROGRESS_INFO);
 
-		if (progressInfo != null) {
+		if (info != null) {
 			json.put(S, 1);
-			json.put(Commons.IMAGE_PROGRESS_INFO, progressInfo);
+			json.put(Commons.IMAGE_PROGRESS_INFO, info);
 		}
 
 		return JSON;

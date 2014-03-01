@@ -7,7 +7,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.UUID;
 
-import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -22,7 +21,7 @@ import org.springframework.stereotype.Controller;
 
 import com.dendnight.base.BaseAction;
 import com.dendnight.base.Commons;
-import com.dendnight.gallery.extend.UploadInfo;
+import com.dendnight.gallery.extend.UploadProgressInfo;
 import com.dendnight.gallery.model.DataBase64;
 import com.dendnight.gallery.model.Image;
 import com.dendnight.gallery.model.Thumbnail;
@@ -87,28 +86,19 @@ public class UploadImageAction extends BaseAction {
 			return JSON;
 		}
 
-		progressInfo();
-
 		// 图片路径 FIXME
-		String realPath = "D:/Temp";// ServletActionContext.getServletContext().getRealPath("/images");
-		String dateTime = new SimpleDateFormat("yyyy/MM/dd").format(new Date());
+		String realPath = "/home/gallery";// ServletActionContext.getServletContext().getRealPath("/images");
+		String dateTime = new SimpleDateFormat("yyyy/MM/dd/").format(new Date());
 		String uuid = UUID.randomUUID().toString();
 
 		// 缩略图
-		String thumbnailFilePath = realPath + "/thumbnails/" + dateTime + "/" + uuid + ".jpg";
-		String base64Str = null;
-		File thumbnailFile = null;
+		String base64Str = "";
 		try {
-			thumbnailFile = new File(thumbnailFilePath);
-			// 判断路径是否存在
-			if (!thumbnailFile.getParentFile().exists()) {
-				// 如果不存在，则递归创建此路径
-				thumbnailFile.getParentFile().mkdirs();
-			}
 			// FIXME 200 宽度不变
-			Thumbnails.of(uploadFile).width(200).outputFormat("jpg").toFile(thumbnailFile);
-			// 缩略图toBase64
-			base64Str = ImageUtils.encodeToString(ImageIO.read(thumbnailFile), "jpg");
+			// 缩略图toBase64统一用“jpg”格式
+			base64Str = "data:jpg;base64,"
+					+ ImageUtils.encodeToString(Thumbnails.of(uploadFile).width(200).outputFormat("jpg")
+							.asBufferedImage(), "jpg");
 		} catch (IOException e) {
 			log.warn(e);
 			json.put(S, 0);
@@ -128,7 +118,7 @@ public class UploadImageAction extends BaseAction {
 			try {
 
 				// 创建一个新 File 实例
-				imageFile = new File(realPath + "/images/" + dateTime + "/" + uuid
+				imageFile = new File(realPath + dateTime + uuid
 						+ uploadFileFileName.substring(uploadFileFileName.lastIndexOf('.')));
 				// 判断路径是否存在
 				if (!imageFile.getParentFile().exists()) {
@@ -165,14 +155,16 @@ public class UploadImageAction extends BaseAction {
 
 		Thumbnail thumbnail = new Thumbnail();
 		thumbnail.setBase64Id(db64Id);
-		thumbnail.setFilePath(thumbnailFile.getAbsolutePath());
+		thumbnail.setFilePath(null);// XXX 不用
 
 		thumbnail.setImageId(md5);
 		thumbnail.setPublish(1);
 		thumbnailService.add(thumbnail, info());
 
+		progressInfo();
 		json.put(S, 1);
 		json.put(M, "上传成功");
+
 		return JSON;
 	}
 
@@ -183,11 +175,10 @@ public class UploadImageAction extends BaseAction {
 
 		HttpServletRequest request = ServletActionContext.getRequest();
 		HttpSession session = request.getSession(true);
-		UploadInfo progressInfo = (UploadInfo) session.getAttribute(Commons.IMAGE_PROGRESS_INFO);
-		if (progressInfo != null) {
-			progressInfo.setStatus(UploadInfo.STATUS_DONE);
-			progressInfo.setBytesRead(progressInfo.getTotalSize());
-			session.setAttribute(Commons.IMAGE_PROGRESS_INFO, progressInfo);
+		UploadProgressInfo info = (UploadProgressInfo) session.getAttribute(Commons.IMAGE_PROGRESS_INFO);
+		if (info != null) {
+			info.setReadedBytes(info.getTotalBytes());
+			session.setAttribute(Commons.IMAGE_PROGRESS_INFO, info);
 		}
 	}
 

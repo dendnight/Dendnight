@@ -24,20 +24,25 @@
 	
 	function beginUpload() {
 		var i = setInterval(function() {
-		$.getJSON("<%=url%>gallery/upload-progress.htm", function(data) {
-				var percentage = Math.floor(100 * parseInt(data.progress.bytesRead)
-						/ parseInt(data.progress.totalSize));
+			$.getJSON("<%=url%>gallery/upload-progress.htm", function(data) {
+				if(data.t){
+					clearInterval(i);
+					$('#login-modal').modal('show');
+					return;
+				}
+				var progress = data.progress;
+				var percentage = Math.floor(100 * parseInt(progress.readedBytes) / parseInt(progress.totalBytes));
+				//alert(percentage);
 				$(".progress-bar").css("width", percentage + "%");
 				$(".progress-bar").html(percentage + "%");
-				if (data.s == 1)//terminate the procedure.
+				if (100 == percentage)//terminate the procedure.
 				{
 					alert("上传成功！");
 					clearInterval(i);
 					return;
 				}
-
 			});
-		}, 500);
+		}, 100);
 	}
 </script>
 </head>

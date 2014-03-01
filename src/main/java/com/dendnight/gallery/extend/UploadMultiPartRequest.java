@@ -78,7 +78,7 @@ public class UploadMultiPartRequest implements MultiPartRequest {
 			upload.setProgressListener(new UploadProgressListener(servletRequest));
 			// --------------add by wf end------------
 
-			List items = upload.parseRequest(createRequestContext(servletRequest));
+			List<FileItem> items = upload.parseRequest(createRequestContext(servletRequest));
 
 			for (Object item1 : items) {
 				FileItem item = (FileItem) item1;
@@ -279,7 +279,7 @@ public class UploadMultiPartRequest implements MultiPartRequest {
 	 * 
 	 * @see org.apache.struts2.dispatcher.multipart.MultiPartRequest#getErrors()
 	 */
-	public List getErrors() {
+	public List<String> getErrors() {
 		return errors;
 	}
 

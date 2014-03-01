@@ -78,7 +78,7 @@ public class ImageUtils {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		return "data:" + type + ";base64," + imageString;
+		return imageString;
 	}
 
 	public static void main(String args[]) throws IOException {
