@@ -13,10 +13,19 @@
 	$(function() {
 		// 提交表单
 		$(".btn-default").click(function() {
+			if("" == $('#uploadFile').val()){
+				
+			}
 			$(".progress-bar").css("width", "0%");
 			$(".progress-bar").html("0%");
 			beginUpload();
-			$("#upload-form").ajaxSubmit();
+			$("#upload-form").ajaxSubmit(function(data){
+				if(data.t){
+					$('#login-modal').modal('show');
+					return;
+				}
+				alert(data.m);
+			});
 			return false;
 		});
 
@@ -31,13 +40,16 @@
 					return;
 				}
 				var progress = data.progress;
+				if(0 == progress.readedBytes){// 上传失败
+					clearInterval(i);
+					return;
+				}
 				var percentage = Math.floor(100 * parseInt(progress.readedBytes) / parseInt(progress.totalBytes));
 				//alert(percentage);
 				$(".progress-bar").css("width", percentage + "%");
 				$(".progress-bar").html(percentage + "%");
 				if (100 == percentage)//terminate the procedure.
 				{
-					alert("上传成功！");
 					clearInterval(i);
 					return;
 				}

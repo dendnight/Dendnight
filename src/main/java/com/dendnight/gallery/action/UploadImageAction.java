@@ -81,13 +81,14 @@ public class UploadImageAction extends BaseAction {
 		// 验证图片
 		if (null == uploadFile || !Commons.IMAGETYPE.contains(uploadFileContentType)
 				|| Commons.IMAGE_MAX_SIZE < uploadFile.length()) {
+			errorProgressInfo();
 			json.put(S, 0);
 			json.put(M, "请上传符合要求的图片");
 			return JSON;
 		}
 
 		// 图片路径 FIXME
-		String realPath = "/home/gallery";// ServletActionContext.getServletContext().getRealPath("/images");
+		String realPath = "/home/gallery/";// ServletActionContext.getServletContext().getRealPath("/images");
 		String dateTime = new SimpleDateFormat("yyyy/MM/dd/").format(new Date());
 		String uuid = UUID.randomUUID().toString();
 
@@ -101,6 +102,8 @@ public class UploadImageAction extends BaseAction {
 							.asBufferedImage(), "jpg");
 		} catch (IOException e) {
 			log.warn(e);
+
+			errorProgressInfo();
 			json.put(S, 0);
 			json.put(M, "上传失败");
 			return JSON;
@@ -112,7 +115,7 @@ public class UploadImageAction extends BaseAction {
 		Image imageOld = imageService.find(md5, info());
 		if (null == imageOld) {
 			File imageFile = null;
-			int imgWidth = 0;
+			int imgWidth = 0;// FIXME 图片属性
 			int imgHeight = 0;
 
 			try {
@@ -130,6 +133,8 @@ public class UploadImageAction extends BaseAction {
 				FileUtils.copyFile(uploadFile, imageFile);
 			} catch (IOException e) {
 				log.warn(e);
+
+				errorProgressInfo();
 				json.put(S, 0);
 				json.put(M, "上传失败");
 				return JSON;
@@ -178,6 +183,20 @@ public class UploadImageAction extends BaseAction {
 		UploadProgressInfo info = (UploadProgressInfo) session.getAttribute(Commons.IMAGE_PROGRESS_INFO);
 		if (info != null) {
 			info.setReadedBytes(info.getTotalBytes());
+			session.setAttribute(Commons.IMAGE_PROGRESS_INFO, info);
+		}
+	}
+
+	/**
+	 * 失败了的进度条信息
+	 */
+	private void errorProgressInfo() {
+
+		HttpServletRequest request = ServletActionContext.getRequest();
+		HttpSession session = request.getSession(true);
+		UploadProgressInfo info = (UploadProgressInfo) session.getAttribute(Commons.IMAGE_PROGRESS_INFO);
+		if (info != null) {
+			info.setReadedBytes(0);
 			session.setAttribute(Commons.IMAGE_PROGRESS_INFO, info);
 		}
 	}
