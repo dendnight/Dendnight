@@ -88,7 +88,7 @@ public class UploadImageAction extends BaseAction {
 		}
 
 		// 图片路径 FIXME
-		String realPath = "/home/gallery/";// ServletActionContext.getServletContext().getRealPath("/images");
+		// ServletActionContext.getServletContext().getRealPath("/images");
 		String dateTime = new SimpleDateFormat("yyyy/MM/dd/").format(new Date());
 		String uuid = UUID.randomUUID().toString();
 
@@ -121,7 +121,7 @@ public class UploadImageAction extends BaseAction {
 			try {
 
 				// 创建一个新 File 实例
-				imageFile = new File(realPath + dateTime + uuid
+				imageFile = new File(Commons.IMAGE_ROOT + dateTime + uuid
 						+ uploadFileFileName.substring(uploadFileFileName.lastIndexOf('.')));
 				// 判断路径是否存在
 				if (!imageFile.getParentFile().exists()) {

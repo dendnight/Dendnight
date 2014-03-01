@@ -40,4 +40,6 @@ public class Commons {
 	/** 图片文件最大值 5MB */
 	public static final Long IMAGE_MAX_SIZE = 5242880L;
 
+	/** 图片根目录 */
+	public static final String IMAGE_ROOT = "/home/dendnight/gallery/";
 }
