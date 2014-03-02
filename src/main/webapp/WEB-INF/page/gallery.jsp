@@ -13,51 +13,39 @@
 <style type="text/css">
 
 .img-thumbnail{
-	margin-top:20px;
+	margin:20px 5px 0px 5px;
 }
 
-@media screen and(min-width:540px){
-	.img-thumbnail,.img-thumbnail img{
-		width:100%;
-	}
+.img-thumbnail img{
+	width:100%;
 }
-@media screen and(max-width:980px){
-	.img-thumbnail img{
-		width:25%;
-	}
-}
+
 </style>
+<script type="text/javascript" src="<%=url %>js/jquery.isotope.min.js"></script>
 <script type="text/javascript" src="<%=url %>js/jquery.fancybox.min.js"></script>
 <script type="text/javascript" src="<%=url %>js/jquery.mousewheel.min.js"></script>
-<script type="text/javascript" src="<%=url %>js/jquery.masonry.min.js"></script>
 <script type="text/javascript">
 	var page = 1;
 	
 	$(function(){
 		$('.fancybox').fancybox({openEffect : 'elastic'});
+
+		$gallery = $("#gallery");
+		
+		$gallery.isotope({
+			itemSelector : '.img-thumbnail'
+		});	
 		
 		loadGallery(page);
 		
-		var orig_scroll_height = $("#footer").position().top - jQuery(window).height() - 200;
-		$(window).scroll(function() {
-			alert(jQuery(window).scrollTop()+":"+jQuery(window).height()+":"+$("body").height());
-		});
-		/*
-		jQuery(window).scroll(function () {
-			//console.log(jQuery(this).scrollTop());
-			if (jQuery(this).scrollTop() > 100) {
-				jQuery('#footer').addClass('showme');
-			} else {
-				jQuery('#footer').removeClass('showme');
-			}
-		});
-		//alert($(window).height() +":"+ $(window).scrollTop()  +":"+  ($(document).height() - 200));
-		//if (0 != $(window).scrollTop() && ($(window).height() + $(window).scrollTop()) >= $(document).height() - 100){
-		//loading(); //加载数据函数
-			alert(1);
-			loadGallery(page++);
-		//}
-			*/
+		// 滚动刷新
+		$(window).scroll(function () {
+            console.log($(window).height() +":"+ $(window).scrollTop() +":"+ $("#gallery").height());
+            if ($(window).height() + $(window).scrollTop() >= $("#gallery").height()) {
+            	$("#lodding").show();
+            	loadGallery(++page);
+            };
+        });
 
 	});
 
@@ -73,20 +61,21 @@
 					$('#login-modal').modal('show');
 					return;
 				}
-				var imgs = "";
+				var items = [];
 				$.each(data.o, function(i, item) {
-					imgs = "<div class=\"img-thumbnail\">";
-					imgs += "<a class=\"fancybox\" href=\""+"<%=url %>"+item.imagePath+"\" data-fancybox-group=\"gallery\">";
-					imgs += "<img src=\""+item.image+"\"></a></div>";
-					$("#gallery").append(imgs);
+					items.push("<div class=\"img-thumbnail\">");
+					items.push("<a class=\"fancybox\" href=\""+"<%=url %>"+item.imagePath+"\" data-fancybox-group=\"gallery\">");
+					items.push("<img src=\""+item.image+"\"></a></div>");
 				});
-					
-				//$("#gallery").html(imgs);
-				$('#gallery').masonry({
-					 columnWidth: 25,
-					 itemSelector: '.img-thumbnail'
-				}).masonry( 'appended', imgs );
-				setInterval("$('#gallery').masonry('reload');",100);
+				var newEls = items.join('');
+
+				var content = $(newEls);
+				$gallery.append(content);
+				$gallery.imagesLoaded(function(){	
+					$gallery.isotope('appended', content).isotope('reLayout');
+				});
+				
+				$("#lodding").hide();
 			}
 		});
 	}
@@ -99,6 +88,9 @@
 <body>
 	<div id="gallery">
 	
-	</div> 
+	</div>
+	<div id="lodding" style="text-align: center;display: none;">
+		正在加载...
+	</div>
 </body>
 </html>

@@ -23,7 +23,7 @@
 					$('#login-modal').modal('show');
 					return;
 				}
-				alert(data.m);
+				$.growlUI(data.m);
 			});
 			return false;
 		});
