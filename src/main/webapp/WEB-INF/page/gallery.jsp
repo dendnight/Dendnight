@@ -40,14 +40,14 @@
 		
 		// 滚动刷新
 		$(window).scroll(function () {
-            console.log($(window).height() +":"+ $(window).scrollTop() +":"+ $("#gallery").height());
+            //console.log($(window).height() +":"+ $(window).scrollTop() +":"+ $("#gallery").height());
             if ($(window).height() + $(window).scrollTop() >= $("#gallery").height()) {
-            	page = ++page;
+            	++page;
             	if(page > totalPage){// 当前页大于总页数，不给予loading
             		return;
             	}
             	$("#loading").show();
-            	loadGallery();
+            	loadGallery(page);
             };
         });
 
