@@ -23,6 +23,7 @@ String url = request.getScheme()+"://"+request.getServerName()+":"+request.getSe
 		<![endif]-->
 		<script type="text/javascript" src="<%= url %>js/jquery.min.js"></script>
 	    <script type="text/javascript" src="<%= url %>js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="<%= url %>js/jquery.blockUI.js"></script>
 		<script type="text/javascript" src="<%= url %>js/jquery.form.min.js"></script>
 		<script type="text/javascript" src="<%= url %>js/jquery.validate.min.js"></script>
 		<decorator:head/>

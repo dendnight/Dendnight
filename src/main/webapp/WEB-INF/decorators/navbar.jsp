@@ -16,6 +16,7 @@
 						if($('#login-form').valid()){
 							$("#login-form").ajaxSubmit(function(data) {
 								if (data.s) {
+									$.growlUI(data.m); 
 									$('#nickname').text(data.o);
 									$('#login-li').hide();
 									$('#login-li').next('li').show();
@@ -53,6 +54,7 @@
 								if(data.s){
 									$('#login-li').show();
 									$('#login-li').next().hide();
+									$.growlUI(data.m); 
 								}
 							}
 						});
@@ -86,7 +88,7 @@
 						<b class="caret"></b>
 					</a>
 					<ul class="dropdown-menu">
-						<li  id="logout"><a href="#logout">安全退出</a></li>
+						<li  id="logout"><a href="#logout">退出</a></li>
 					</ul>
 				</li>
 				</s:if>
@@ -99,7 +101,7 @@
 						<b class="caret"></b>
 					</a>
 					<ul class="dropdown-menu">
-						<li id="logout"><a href="#logout">安全退出</a></li>
+						<li id="logout"><a href="#logout">退出</a></li>
 					</ul>
 				</li>
 				</s:else>

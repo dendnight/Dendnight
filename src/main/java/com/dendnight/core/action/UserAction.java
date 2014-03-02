@@ -110,6 +110,8 @@ public class UserAction extends BaseAction {
 
 		json.put(S, 1);
 		json.put(O, info.getNickname());
+		json.put(M, "登录成功");
+
 		return JSON;
 	}
 
@@ -117,6 +119,8 @@ public class UserAction extends BaseAction {
 		json = new HashMap<String, Object>();
 		session.put(LOGININFO, null);
 		json.put(S, 1);
+
+		json.put(M, "已退出");
 		return JSON;
 	}
 

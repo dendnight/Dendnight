@@ -32,11 +32,12 @@
 <script type="text/javascript" src="<%=url %>js/jquery.masonry.min.js"></script>
 <script type="text/javascript">
 	$(function(){
-		$('.fancybox').fancybox();
+		$('.fancybox').fancybox({openEffect : 'elastic'});
 		
 		$.ajax({
             type: "POST",
 			url: "<%=url%>gallery/list.htm",
+			data:{'page':1},
 			dataType: 'json',
 			success: function(data) {
 				if(data.t){
@@ -46,21 +47,21 @@
 
 				var imgs = "";
 				$.each(data.o, function(i, item) {
-					imgs += "<div class=\"img-thumbnail\">";
+					imgs = "<div class=\"img-thumbnail\">";
 					imgs += "<a class=\"fancybox\" href=\""+"<%=url %>"+item.imagePath+"\" data-fancybox-group=\"gallery\">";
 					imgs += "<img src=\""+item.image+"\"></a></div>";
+					$("#gallery").append(imgs);
 				});
 				
-				$("#container").html(imgs);
-				$('#container').masonry({
+				//$("#gallery").html(imgs);
+				$('#gallery').masonry({
 					 columnWidth: 25,
 					 itemSelector: '.img-thumbnail'
 				}).masonry( 'appended', imgs );
 
-				setInterval("$('#container').masonry('reload');",100);
 			}
 		});
-
+		setInterval("$('#gallery').masonry('reload');",100);
 	});
 
 	function openImage(path){
@@ -72,7 +73,7 @@
 </head>
 
 <body>
-	<div id="container">
+	<div id="gallery">
 	
 	</div> 
 </body>
