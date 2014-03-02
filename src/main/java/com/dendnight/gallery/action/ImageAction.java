@@ -55,12 +55,8 @@ public class ImageAction extends BaseAction {
 			return JSON;
 		}
 
-		String url = image.getFilePath();
-		url = url.substring(16);
-		System.out.println(url);
-
 		json.put(S, 1);
-		json.put(O, url);
+		json.put(O, image.getFilePath());
 		return JSON;
 	}
 

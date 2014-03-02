@@ -87,11 +87,6 @@ public class UploadImageAction extends BaseAction {
 			return JSON;
 		}
 
-		// 图片路径 FIXME
-		// ServletActionContext.getServletContext().getRealPath("/images");
-		String dateTime = new SimpleDateFormat("yyyy/MM/dd/").format(new Date());
-		String uuid = UUID.randomUUID().toString();
-
 		// 缩略图
 		String base64Str = "";
 		try {
@@ -114,15 +109,19 @@ public class UploadImageAction extends BaseAction {
 
 		Image imageOld = imageService.find(md5, info());
 		if (null == imageOld) {
-			File imageFile = null;
 			int imgWidth = 0;// FIXME 图片属性
 			int imgHeight = 0;
-
+			String path = "";
 			try {
+				// 图片路径 FIXME
+				// ServletActionContext.getServletContext().getRealPath("/images");
+				String dateTime = new SimpleDateFormat("yyyy/MM/dd/").format(new Date());
+				String uuid = UUID.randomUUID().toString();
 
+				path = "Pictures/" + dateTime + uuid
+						+ uploadFileFileName.substring(uploadFileFileName.lastIndexOf('.'));
 				// 创建一个新 File 实例
-				imageFile = new File(Commons.IMAGE_ROOT + dateTime + uuid
-						+ uploadFileFileName.substring(uploadFileFileName.lastIndexOf('.')));
+				File imageFile = new File(Commons.IMAGE_ROOT + path);
 				// 判断路径是否存在
 				if (!imageFile.getParentFile().exists()) {
 					// 如果不存在，则递归创建此路径
@@ -133,15 +132,15 @@ public class UploadImageAction extends BaseAction {
 				FileUtils.copyFile(uploadFile, imageFile);
 			} catch (IOException e) {
 				log.warn(e);
-
 				errorProgressInfo();
+
 				json.put(S, 0);
 				json.put(M, "上传失败");
 				return JSON;
 			}
 
 			Image image = new Image();
-			image.setFilePath(imageFile.getAbsolutePath());
+			image.setFilePath(path);
 			image.setHeight(imgHeight);
 
 			image.setWidth(imgWidth);

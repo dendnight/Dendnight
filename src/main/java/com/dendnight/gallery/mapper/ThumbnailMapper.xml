@@ -383,12 +383,13 @@
 
 	<select id="list" parameterType="com.dendnight.gallery.criteria.ThumbnailCriteria" resultMap="list_map">
 		select
-		<include refid="Base_Column_List" />,db.data as dataBase64
+		<include refid="Base_Column_List" />,db.data as dataBase64,i.file_path as imagePath
 		from t_thumbnail t left join t_data_base64 db on t.base64_id = db.id 
+		left join t_image i on t.image_id = i.id 
 		<if test="_parameter != null">
 			<include refid="list_where" />
 		</if>
-		ORDER BY ${sort} ${order}
+		ORDER BY t.${sort} ${order}
 		<if test="pagesize != 0">
 			LIMIT #{offset}, #{pagesize}
 		</if>
@@ -396,5 +397,6 @@
 	
 	<resultMap extends="BaseResultMap" type="com.dendnight.gallery.model.vo.ThumbnailVo" id="list_map">
 	    <result column="dataBase64" property="dataBase64"/>
+	    <result column="imagePath" property="imagePath"/>
 	</resultMap>
 </mapper>

@@ -64,10 +64,9 @@ public class GalleryAction extends BaseAction {
 
 			for (ThumbnailVo it : list.getResult()) {
 				map = new HashMap<String, Object>();
-				map.put("imageId", it.getImageId());
-				// map.put("filePath", it.getFilePath());
+				map.put("image", it.getDataBase64());
+				map.put("imagePath", it.getImagePath());
 
-				map.put("base64", it.getDataBase64());
 				thumbnail.add(map);
 			}
 		}

@@ -13,5 +13,10 @@
 		    <interceptor-ref name="defaultStack"></interceptor-ref>
 		</action>
 
+		<!-- 跳转页面 -->
+		<action name="gallery" class="TransmitAction" method="gallery">
+		    <interceptor-ref name="defaultStack"></interceptor-ref>
+		    <result>/WEB-INF/page/gallery.jsp</result>
+		</action>
 	</package>
 </struts>
