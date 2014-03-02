@@ -25,7 +25,7 @@
 <script type="text/javascript" src="<%=url %>js/jquery.fancybox.min.js"></script>
 <script type="text/javascript" src="<%=url %>js/jquery.mousewheel.min.js"></script>
 <script type="text/javascript">
-	var page = 1;
+	var page = 1,totalPage = 1;// 当前页、总页数
 	
 	$(function(){
 		$('.fancybox').fancybox({openEffect : 'elastic'});
@@ -42,8 +42,12 @@
 		$(window).scroll(function () {
             console.log($(window).height() +":"+ $(window).scrollTop() +":"+ $("#gallery").height());
             if ($(window).height() + $(window).scrollTop() >= $("#gallery").height()) {
-            	$("#lodding").show();
-            	loadGallery(++page);
+            	page = ++page;
+            	if(page > totalPage){// 当前页大于总页数，不给予loading
+            		return;
+            	}
+            	$("#loading").show();
+            	loadGallery();
             };
         });
 
@@ -63,9 +67,15 @@
 				}
 				var items = [];
 				$.each(data.o, function(i, item) {
-					items.push("<div class=\"img-thumbnail\">");
-					items.push("<a class=\"fancybox\" href=\""+"<%=url %>"+item.imagePath+"\" data-fancybox-group=\"gallery\">");
-					items.push("<img src=\""+item.image+"\"></a></div>");
+					if(null != item.imagePath){
+						items.push("<div class=\"img-thumbnail\">");
+						items.push("<a class=\"fancybox\" href=\""+"<%=url %>"+item.imagePath+"\" data-fancybox-group=\"gallery\">");
+						items.push("<img src=\""+item.image+"\"></a></div>");
+					}
+
+					if(null != item.totalPage){
+						totalPage = item.totalPage
+					}
 				});
 				var newEls = items.join('');
 
@@ -75,7 +85,7 @@
 					$gallery.isotope('appended', content).isotope('reLayout');
 				});
 				
-				$("#lodding").hide();
+				$("#loading").hide();
 			}
 		});
 	}
@@ -89,7 +99,7 @@
 	<div id="gallery">
 	
 	</div>
-	<div id="lodding" style="text-align: center;display: none;">
+	<div id="loading" style="text-align: center;display: none;">
 		正在加载...
 	</div>
 </body>

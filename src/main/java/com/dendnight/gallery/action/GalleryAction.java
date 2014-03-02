@@ -66,9 +66,12 @@ public class GalleryAction extends BaseAction {
 				map = new HashMap<String, Object>();
 				map.put("image", it.getDataBase64());
 				map.put("imagePath", it.getImagePath());
-
 				thumbnail.add(map);
 			}
+
+			map = new HashMap<String, Object>();
+			map.put("totalPage", list.getPagination().getTotalPage());
+			thumbnail.add(map);
 		}
 
 		json.put(S, 1);
