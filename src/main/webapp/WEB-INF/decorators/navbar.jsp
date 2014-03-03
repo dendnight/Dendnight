@@ -6,62 +6,6 @@
 	String url = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path
 			+ "/";
 %>
-
-				<script>
-				$(function() {
-					// 提交表单
-					$('#login-submit').click(function() {
-						var btn = $(this);
-						btn.button('loading');
-						if($('#login-form').valid()){
-							$("#login-form").ajaxSubmit(function(data) {
-								if (data.s) {
-									$.growlUI(data.m); 
-									$('#nickname').text(data.o);
-									$('#login-li').hide();
-									$('#login-li').next('li').show();
-									$('#login-modal').modal('hide');
-								}else{
-									$('.alert').show();
-									$('#login-msg').text(data.m);
-								}
-							});							
-						}
-						btn.button('reset');
-						return false;
-					});
-			
-					$('#login-form').validate({
-					    rules: {
-					      username: {minlength: 6,required: true},
-					      password: {required: true}
-					  	},
-						messages : {
-							username:{required:'帐号不能为空',minlength:'帐号最少为{0}个字符'},
-							password:{required:'密码不能为空',minlength:'密码最少为{0}个字符'}
-						},highlight: function(element) {
-								$(element).closest('.form-group').removeClass('has-success').addClass('has-error');
-						},success: function(element) {
-								$(element).closest('.form-group').removeClass('has-error').addClass('has-success');
-						}
-					  });
-					
-					$('#logout').click(function(){
-						$.ajax({
-							url: "<%=url%>logout.htm",
-							dataType: 'json',
-							success: function(data) {
-								if(data.s){
-									$('#login-li').show();
-									$('#login-li').next().hide();
-									$.growlUI(data.m); 
-								}
-							}
-						});
-						
-					});
-				});
-				</script>
 <div class="navbar navbar-inverse navbar-fixed-top">
 	<div class="container">
 		<div class="navbar-header">
@@ -138,4 +82,9 @@
 	   </form>
 	  </div>
   </div>
+</div>
+<div id="gotop-div" style="display:none;position:fixed;right:50px;bottom:70px;z-index:100;">
+	<button id="gotop-btn" type="button" class="btn btn-default">
+  		<span class="glyphicon glyphicon-eject"></span>
+	</button>
 </div>

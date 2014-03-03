@@ -156,9 +156,9 @@
 			// styles applied when using $.growlUI
 			growlCSS: {
 				width:		'200px',
-				top:		'80%',
-				left:		'',
-				right:		'10px',
+				top:		'45%',
+				left:		'45%',
+				right:		'',
 				border:		'none',
 				padding:	'5px',
 				opacity:	0.6,

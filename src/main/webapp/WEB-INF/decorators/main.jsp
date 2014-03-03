@@ -16,6 +16,7 @@ String url = request.getScheme()+"://"+request.getServerName()+":"+request.getSe
 	    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1"/>
 	    <meta name="author" content="dendnight"/>
 		<link rel="stylesheet" href="<%= url %>css/style.css"/>
+	    <link rel="stylesheet" href="<%= url %>css/nprogress.css"/>
 	    <link rel="stylesheet" href="<%= url %>css/bootstrap.min.css"/>
 		<link rel="shortcut icon" type="image/x-icon" href="<%= url %>images/favicon.ico"/>
 		<!--[if lt IE 9]>
@@ -25,6 +26,7 @@ String url = request.getScheme()+"://"+request.getServerName()+":"+request.getSe
 	    <script type="text/javascript" src="<%= url %>js/bootstrap.min.js"></script>
 		<script type="text/javascript" src="<%= url %>js/jquery.blockUI.js"></script>
 		<script type="text/javascript" src="<%= url %>js/jquery.form.min.js"></script>
+		<script type="text/javascript" src="<%= url %>js/jquery.nprogress.js"></script>
 		<script type="text/javascript" src="<%= url %>js/jquery.validate.min.js"></script>
 		<decorator:head/>
     </head>
