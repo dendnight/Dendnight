@@ -25,7 +25,7 @@ $(function() {
 			NProgress.start();
 			$("#login-form").ajaxSubmit(function(data) {
 				if (data.s) {
-					//$.growlUI(data.m);
+					$.growlUI(data.m);
 					$('#nickname').text(data.o);
 					$('#login-li').hide();
 					$('#login-li').next('li').show();
@@ -82,7 +82,7 @@ $(function() {
 				if (data.s) {
 					$('#login-li').show();
 					$('#login-li').next().hide();
-					//$.growlUI(data.m);
+					$.growlUI(data.m);
 				}
 			}
 		});
