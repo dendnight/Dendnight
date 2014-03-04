@@ -108,7 +108,7 @@
 					if(null != item.imagePath){
 						items.push("<div class=\"gallery\">");
 						items.push("<a class=\"fancybox\" href=\""+"<%=url %>"+item.imagePath+"\" data-fancybox-group=\"gallery\">");
-						items.push("<img src=\""+item.image+"\"></a><span class=\"favorite\" onclick=\"favorite(this);return false;\">1</span></div>");
+						items.push("<img src=\""+item.image+"\"><div style=\"height:20px;width:100%\">你妹的</div></a><span class=\"favorite\" onclick=\"favorite(this);return false;\">1</span></div>");
 					}
 
 					if(null != item.totalPage){
