@@ -19,15 +19,14 @@ String url = request.getScheme()+"://"+request.getServerName()+":"+request.getSe
 	    <link rel="stylesheet" href="<%= url %>css/nprogress.css"/>
 	    <link rel="stylesheet" href="<%= url %>css/bootstrap.min.css"/>
 		<link rel="shortcut icon" type="image/x-icon" href="<%= url %>images/favicon.ico"/>
-		<!--[if lt IE 9]>
-		<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-		<![endif]-->
 		<script type="text/javascript" src="<%= url %>js/jquery.min.js"></script>
 	    <script type="text/javascript" src="<%= url %>js/bootstrap.min.js"></script>
 		<script type="text/javascript" src="<%= url %>js/jquery.blockUI.js"></script>
 		<script type="text/javascript" src="<%= url %>js/jquery.form.min.js"></script>
 		<script type="text/javascript" src="<%= url %>js/jquery.nprogress.js"></script>
 		<script type="text/javascript" src="<%= url %>js/jquery.validate.min.js"></script>
+		<script type="text/javascript" src="<%= url %>js/dendnight.core.js"></script>
+		
 		<decorator:head/>
     </head>
 	<body>
