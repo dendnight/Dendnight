@@ -118,7 +118,7 @@ public class UploadImageAction extends BaseAction {
 				String dateTime = new SimpleDateFormat("yyyy/MM/dd/").format(new Date());
 				String uuid = UUID.randomUUID().toString();
 
-				path = "Pictures/" + dateTime + uuid
+				path = "pictures/" + dateTime + uuid
 						+ uploadFileFileName.substring(uploadFileFileName.lastIndexOf('.'));
 				// 创建一个新 File 实例
 				File imageFile = new File(Commons.IMAGE_ROOT + path);

@@ -76,7 +76,7 @@
 		</div>
 	   </div>
 	   <div class="modal-footer">
-	       <button type="reset" class="btn btn-default" style="width:45%" data-dismiss="modal">取消</button>
+	       <button type="button" class="btn btn-default" style="width:45%" data-dismiss="modal">取消</button>
 	       <button id="login-submit" type="submit" class="btn btn-primary" style="width:45%" data-loading-text="验证中...">登录</button>
 	   </div>
 	   </form>

@@ -14,7 +14,7 @@ $(function() {
 	$('#gotop-btn').click(function() {
 		$('body,html').animate({
 			scrollTop : 0
-		}, 1000);
+		}, 500);
 	});
 
 	// 提交表单
@@ -50,6 +50,7 @@ $(function() {
 						required : true
 					},
 					password : {
+						minlength : 6,
 						required : true
 					}
 				},

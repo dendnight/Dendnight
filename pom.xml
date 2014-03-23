@@ -134,7 +134,7 @@
 	</dependencies>
 
 	<build>
-		<finalName>Dendnight</finalName>
+		<finalName>dendnight</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.tomcat.maven</groupId>

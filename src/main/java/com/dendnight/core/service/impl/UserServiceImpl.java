@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -40,10 +39,7 @@ public class UserServiceImpl implements UserService {
 	private UserMapper userMapper;
 
 	public int add(User user, LoginInfo info) throws Exception {
-		if (StringUtils.isNotBlank(user.getPassword())) {
-			user.setPassword(Md5Utils.getMd5ByStr(user.getPassword()));
-		}
-
+		user.setPassword(Md5Utils.getMd5ByStr(user.getPassword()));
 		userMapper.insertSelective(user);
 		return user.getId();
 	}
