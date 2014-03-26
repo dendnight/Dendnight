@@ -85,7 +85,7 @@ public class ImageUtils {
 		/* Test image to string and string to image start */
 		BufferedImage img = ImageIO.read(new File(
 				"D:/Temp/thumbnails/2014/02/23005324ee-e0fc-467c-924c-9ddce2cd443a.JPG"));
-		BufferedImage newImg;
+		// BufferedImage newImg;
 		String imgstr;
 		imgstr = encodeToString(img, "jpeg");
 		System.out.println(imgstr);
