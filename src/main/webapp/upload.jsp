@@ -1,11 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="/struts-tags" prefix="s"%>
-<%
-	String path = request.getContextPath();
-	String url = request.getScheme() + "://" + request.getServerName()
-			+ ":" + request.getServerPort() + path + "/";
-%>
 <html>
 <head>
 
@@ -32,7 +27,7 @@
 	
 	function beginUpload() {
 		var i = setInterval(function() {
-			$.getJSON("<%=url%>gallery/upload-progress.htm", function(data) {
+			$.getJSON("gallery/upload-progress.htm", function(data) {
 				if(data.t){
 					clearInterval(i);
 					$('#login-modal').modal('show');
@@ -46,9 +41,12 @@
 					return;
 				}
 				var percentage = Math.floor(100 * parseInt(progress.readedBytes) / parseInt(progress.totalBytes));
+				
 				//alert(percentage);
-				$(".progress-bar").css("width", percentage + "%");
-				$(".progress-bar").html(percentage + "%");
+				if(0 < percentage){
+					$(".progress-bar").css("width", percentage + "%");
+					$(".progress-bar").html(percentage + "%");
+				}
 				if (100 == percentage)//terminate the procedure.
 				{
 					clearInterval(i);
@@ -68,7 +66,7 @@
 
 			<div class="panel panel-default">
 				<div class="panel-body">
-					<form id="upload-form" action="<%=url%>gallery/upload.htm"
+					<form id="upload-form" action="gallery/upload.htm"
 						enctype="multipart/form-data" method="post">
 						<input type="file" name="uploadFile" /> <br />
 						<button type="submit" data-loading-text="提交中..."

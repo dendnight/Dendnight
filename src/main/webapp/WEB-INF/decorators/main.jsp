@@ -3,10 +3,6 @@
 <%@ taglib uri="/struts-tags" prefix="s"%>
 <%@ taglib uri="http://www.opensymphony.com/sitemesh/page" prefix="page"%>
 <%@ taglib uri="http://www.opensymphony.com/sitemesh/decorator" prefix="decorator"%>
-<%  
-String path = request.getContextPath();  
-String url = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";  
-%>
 <!doctype html>
 <html lang="zh-CN">
 	<head>
@@ -15,17 +11,17 @@ String url = request.getScheme()+"://"+request.getServerName()+":"+request.getSe
 	    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 	    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1"/>
 	    <meta name="author" content="dendnight"/>
-		<link rel="stylesheet" href="<%= url %>css/style.css"/>
-	    <link rel="stylesheet" href="<%= url %>css/nprogress.css"/>
-	    <link rel="stylesheet" href="<%= url %>css/bootstrap.min.css"/>
-		<link rel="shortcut icon" type="image/x-icon" href="<%= url %>images/favicon.ico"/>
-		<script type="text/javascript" src="<%= url %>js/jquery.min.js"></script>
-	    <script type="text/javascript" src="<%= url %>js/bootstrap.min.js"></script>
-		<script type="text/javascript" src="<%= url %>js/jquery.blockUI.js"></script>
-		<script type="text/javascript" src="<%= url %>js/jquery.form.min.js"></script>
-		<script type="text/javascript" src="<%= url %>js/jquery.nprogress.js"></script>
-		<script type="text/javascript" src="<%= url %>js/jquery.validate.min.js"></script>
-		<script type="text/javascript" src="<%= url %>js/dendnight.core.js"></script>
+		<link rel="stylesheet" href="css/style.css"/>
+	    <link rel="stylesheet" href="css/nprogress.css"/>
+	    <link rel="stylesheet" href="css/bootstrap.min.css"/>
+		<link rel="shortcut icon" type="image/x-icon" href="images/favicon.ico"/>
+		<script type="text/javascript" src="js/jquery.min.js"></script>
+	    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="js/jquery.blockUI.js"></script>
+		<script type="text/javascript" src="js/jquery.form.min.js"></script>
+		<script type="text/javascript" src="js/jquery.nprogress.js"></script>
+		<script type="text/javascript" src="js/jquery.validate.min.js"></script>
+		<script type="text/javascript" src="js/dendnight.core.js"></script>
 		
 		<decorator:head/>
     </head>

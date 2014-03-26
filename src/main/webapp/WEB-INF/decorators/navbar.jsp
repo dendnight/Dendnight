@@ -1,11 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="/struts-tags" prefix="s"%>
-<%
-	String path = request.getContextPath();
-	String url = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path
-			+ "/";
-%>
 <div class="navbar navbar-default navbar-fixed-top">
 	<div class="container">
 		<div class="navbar-header">
@@ -19,7 +14,7 @@
 		</div>
 		<div class="collapse navbar-collapse">
 			<ul class="nav navbar-nav">
-				<li class="active"><a href="<%= url %>">gallery</a></li>
+				<li class="active"><a href="">gallery</a></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<%-- 判断是否登录，未登录的只有登录 --%>
@@ -61,7 +56,7 @@
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
         <h3 class="modal-title" id="myModalLabel">欢迎登录“Dendnight”</h3>
       </div>
-       <form id="login-form" action="<%= url %>login.htm" method="post">
+       <form id="login-form" action="login.htm" method="post">
         <div class="modal-body">
   		 <div style="display: none;" class="alert alert-danger">
 			<span id="login-msg"></span>

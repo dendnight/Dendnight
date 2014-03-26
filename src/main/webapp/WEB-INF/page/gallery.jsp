@@ -1,15 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="/struts-tags" prefix="s"%>
-<%
-	String path = request.getContextPath();
-	String url = request.getScheme() + "://" + request.getServerName()
-			+ ":" + request.getServerPort() + path + "/";
-%>
 <html>
 <head>
-<link rel="stylesheet" href="<%= url %>css/image.css"/>
-<link rel="stylesheet" href="<%= url %>css/highslide/highslide.css"/>
+<link rel="stylesheet" href="css/image.css"/>
+<link rel="stylesheet" href="css/highslide/highslide.css"/>
 <style type="text/css">
 
 .highslide-gallery{
@@ -47,18 +42,18 @@
 }
 
 .favorite {
-	background: url(<%=url%>images/favorite.gif) no-repeat;
+	background: url(images/favorite.gif) no-repeat;
 }
 .favorite-selected {
-	background: url(<%=url%>images/favorite.gif) no-repeat;
+	background: url(images/favorite.gif) no-repeat;
 	background-position: left -22px;
 }
 
 </style>
-<script type="text/javascript" src="<%=url %>js/jquery.masonry.min.js"></script>
-<script type="text/javascript" src="<%=url %>js/highslide-with-gallery.min.js"></script>
+<script type="text/javascript" src="js/jquery.masonry.min.js"></script>
+<script type="text/javascript" src="js/highslide-with-gallery.min.js"></script>
 <script type="text/javascript">
-hs.graphicsDir = '<%=url %>css/highslide/graphics/';
+hs.graphicsDir = 'css/highslide/graphics/';
 hs.align = 'center';
 hs.transitions = ['expand', 'crossfade'];
 hs.outlineType = 'rounded-white';
@@ -116,7 +111,7 @@ hs.addSlideshow({
 		NProgress.start();
 		$.ajax({
 	        type: "POST",
-			url: "<%=url%>gallery/list.htm",
+			url: "gallery/list.htm",
 			data:{'page':page},
 			dataType: 'json',
 			success: function(data) {
@@ -128,7 +123,7 @@ hs.addSlideshow({
 				$.each(data.o, function(i, item) {
 					if(null != item.imagePath){
 						items.push("<div class=\"item\"><a class=\"\" class=\"highslide\" ");
-						items.push("onclick=\"return hs.expand(this);\" href='<%=url %>"+item.imagePath+"' >");
+						items.push("onclick=\"return hs.expand(this);\" href='"+item.imagePath+"' >");
 						items.push("<img src=\""+item.image+"\"></a></div>");
 					}
 
@@ -161,7 +156,7 @@ hs.addSlideshow({
 	
 	</div>
 	<div id="loading" style="text-align: center;display: none;">
-		<img alt="正在加载" src="<%=url %>images/loading.gif"/>
+		<img alt="正在加载" src="images/loading.gif"/>
 	</div>
 </body>
 </html>
